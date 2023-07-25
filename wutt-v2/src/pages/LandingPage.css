@@ -1,0 +1,10 @@
+/* You can adjust the path and other CSS properties as needed */
+.landing-page {
+    background-image: url('/public/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    /* Add other styles as necessary */
+    
+  }
