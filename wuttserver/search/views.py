@@ -1,23 +1,44 @@
 import openai
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+# Set your OpenAI API key here
+openai.api_key = 'YOUR_OPENAI_API_KEY'
+
+@csrf_exempt  # To disable CSRF protection for this view. Use with caution.
+def call_openai_api_view(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)  # Parse the JSON data from the request body
+            response = search(data)
+            # Customize the 'engine' and 'max_tokens' parameters based on your needs
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+        response_data = {'generated_text': response['choices'][0]['text']}
+        with open('response.json', 'w') as file:
+          file.write(response_data)
+
+        return JsonResponse(response_data)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
-def search(request):
-    openai.api_key = "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"
-
-    country = request.POST.get("country", "")
-    city = request.POST.get("city", "")
-    dates = request.POST.get("dates", "")
+def search(body_request):
+    country = body_request.get("country", "")
+    city = body_request.get("city", "")
+    dates = body_request.get("dates", "")
     days = dates #counting days from dates
-    adults_num = request.POST.get("adults_num", "")
-    teens_num = request.POST.get("teens_num", "")
-    children_num = request.POST.get("children_num", "")
-    trip_vibe = request.POST.get("trip_vibe", "")
-    budget = request.POST.get("budget", "")
+    adults_num = body_request.get("adults_num", "")
+    teens_num = body_request.get("teens_num", "")
+    children_num = body_request.get("children_num", "")
+    trip_vibe = body_request.get("trip_vibe", "")
+    budget = body_request.get("budget", "")
 
     prompt = create_prompt(country, city, days, adults_num, teens_num, children_num, trip_vibe, budget)
     responseAPI = create_requset_to_api(prompt=prompt)
-    with open('response.json', 'w') as file:
-        file.write(responseAPI)
+    
+    return responseAPI
 
 def create_requset_to_api(prompt):
     response = openai.Completion.create(
@@ -30,7 +51,7 @@ def create_requset_to_api(prompt):
         presence_penalty=0.0
     )
 
-    return response.choices[0].text.strip()
+    return response
 
 
 def create_prompt(country, city, days, adults_num, teens_num, children_num, trip_vibe, budget):

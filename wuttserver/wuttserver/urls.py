@@ -21,5 +21,5 @@ from search import views as search_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', search_views.search), #name='search'
+    path('call-openai-api/', search_views.call_openai_api_view, name='call-openai-api'),
 ]
