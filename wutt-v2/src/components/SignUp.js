@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,7 +30,18 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
+function validateEmail(email) {
+  // Use a simple regex to check email format
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
 export default function SignUp() {
+  const [emailMessage, setErrorEmail] = useState(''); // ['Email is already taken', 'Password must be at least 8 characters long']
+  const [passwordMessage, setErrorPassword] = useState(''); // ['Email is already taken', 'Password must be at least 8 characters long']
+  const [isEmailInvalid, setIsEmailInvalid] = useState(false);
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formElement = event.currentTarget;
@@ -39,6 +51,26 @@ export default function SignUp() {
     const lastName = formData.get('lastName');
     const email = formData.get('email');
     const password = formData.get('password');
+
+    if (!validateEmail(email)) {
+      setErrorEmail('Invalid email format');
+      setIsEmailInvalid(true);
+    }
+    else {
+      setIsEmailInvalid(false);
+    }
+  
+    if (password.length < 8) {
+      setErrorPassword('Password must be at least 8 characters');
+      setIsPasswordInvalid(true);
+    }
+    else {
+      setIsPasswordInvalid(false);
+    }
+
+    if (isEmailInvalid || isPasswordInvalid) {
+      return;
+    }
 
     try {
       const response = await fetch(backendUrl + '/register/', {
@@ -54,10 +86,18 @@ export default function SignUp() {
         }),
       });
 
-      console.log(response)
-
       const responseData = await response.json();
       console.log(responseData); // Handle response from the server
+
+      if (response.ok) {
+        // Redirect to the sign in page
+        window.location.href = '/signin';
+      }
+      else {
+        // Handle error messages
+        setErrorEmail(responseData.error);
+        setIsEmailInvalid(true)
+      }
 
     } catch (error) {
       console.error('Error:', error);
@@ -113,6 +153,8 @@ export default function SignUp() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    error={isEmailInvalid}
+                    helperText={isEmailInvalid ? emailMessage : ''}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -124,6 +166,8 @@ export default function SignUp() {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    error={isPasswordInvalid}
+                    helperText={isPasswordInvalid ? passwordMessage : ''}
                   />
                 </Grid>
                 <Grid item xs={12}>
