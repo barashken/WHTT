@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from search import views as search_views
+from search.views import OpenAIView
+from users.views import RegisterView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('call-openai-api/', search_views.call_openai_api_view, name='call-openai-api'),
+    path('call-openai-api/', OpenAIView.call_openai_api_view, name='call-openai-api'),
+    path('register/', RegisterView.as_view(), name='register')
 ]
