@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { backendUrl } from '../constants';
 
 function Copyright(props) {
   return (
@@ -34,18 +35,26 @@ export default function SignUp() {
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
 
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+    const email = formData.get('email');
+    const password = formData.get('password');
+
     try {
-      const response = await fetch('register/', {
+      const response = await fetch(backendUrl + '/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.get('email'), // Use email as username for simplicity
-          email: formData.get('email'),
-          password: formData.get('password'),
+            firstName,
+            lastName,
+            email,
+            password,
         }),
       });
+
+      console.log(response)
 
       const responseData = await response.json();
       console.log(responseData); // Handle response from the server
