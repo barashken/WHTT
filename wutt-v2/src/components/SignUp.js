@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { backendUrl } from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -37,6 +38,7 @@ function validateEmail(email) {
 }
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [emailMessage, setErrorEmail] = useState(''); // ['Email is already taken', 'Password must be at least 8 characters long']
   const [passwordMessage, setErrorPassword] = useState(''); // ['Email is already taken', 'Password must be at least 8 characters long']
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
@@ -90,8 +92,14 @@ export default function SignUp() {
       console.log(responseData); // Handle response from the server
 
       if (response.ok) {
-        // Redirect to the sign in page
-        window.location.href = '/signin';
+        // Redirect to the registration-done page
+        navigate('/registration-done', {
+          state: {
+          firstName,
+          lastName,
+          email,
+          },
+        });
       }
       else {
         // Handle error messages
@@ -122,6 +130,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          
           <form onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
