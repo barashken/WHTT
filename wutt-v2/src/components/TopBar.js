@@ -29,7 +29,7 @@ const LogoTitleContainer = styled('div')({
     marginLeft: 'auto', // This pushes the buttons to the right
   });
 
-const TopBar = () => {
+const TopBar = ( { showButtons = true }) => {
   return (
     <StyledAppBar position="static">
       <Toolbar>
@@ -40,6 +40,7 @@ const TopBar = () => {
             </Link>
             <TitleText variant="h6">With Us To Travel</TitleText>
         </LogoTitleContainer>
+        {showButtons && ( // Show buttons only if showButtons is true}
         <ButtonContainer>
             <Button color="inherit" size='large' component={Link} to="/signup">Sign Up</Button>
             {/* Sign In Button */}
@@ -49,6 +50,7 @@ const TopBar = () => {
             <AccountCircle />
             </IconButton>
         </ButtonContainer>
+        )}
       </Toolbar>
     </StyledAppBar>
   );

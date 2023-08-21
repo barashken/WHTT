@@ -5,7 +5,7 @@ import RegistrationDone from '../components/RegistrationDone';
 const RegistrationDonePage = () => {
   return (
     <div>
-        <TopBar />
+        <TopBar showButtons={false}/>
       <RegistrationDone />
     </div>
   );
