@@ -78,3 +78,11 @@ class LoginView(View):
                 return JsonResponse({'error': 'Invalid request body'}, status=400)
 
         return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+class LogoutView(View):
+    @csrf_exempt
+    def post(self, request):
+        if request.method == 'POST':
+            return JsonResponse({'message': 'Logout successful'}, status=200)
+
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
