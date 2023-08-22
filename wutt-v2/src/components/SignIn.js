@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { backendUrl } from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -30,14 +33,105 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
+function validateEmail(email) {
+  // Use a simple regex to check email format
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const [emailMessage, setErrorEmail] = useState(''); // ['Email is already taken', 'Password must be at least 8 characters long']
+  const [passwordMessage, setErrorPassword] = useState(''); // ['Email is already taken', 'Password must be at least 8 characters long']
+  const [isEmailInvalid, setIsEmailInvalid] = useState(false);
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
+
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    if (!validateEmail(email)) {
+      setErrorEmail('Invalid email format');
+      setIsEmailInvalid(true);
+    }
+    else {
+      setIsEmailInvalid(false);
+    }
+  
+    if (password.length < 8) {
+      setErrorPassword('Password must be at least 8 characters');
+      setIsPasswordInvalid(true);
+    }
+    else {
+      setIsPasswordInvalid(false);
+    }
+
+    if (isEmailInvalid || isPasswordInvalid) {
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setErrorEmail('Invalid email format');
+      setIsEmailInvalid(true);
+    }
+    else {
+      setIsEmailInvalid(false);
+    }
+  
+    if (password.length < 8) {
+      setErrorPassword('Password must be at least 8 characters');
+      setIsPasswordInvalid(true);
+    }
+    else {
+      setIsPasswordInvalid(false);
+    }
+
+    if (isEmailInvalid || isPasswordInvalid) {
+      return;
+    }
+
+    try {
+      const response = await fetch(backendUrl + '/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email,
+            password,
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData); // Handle response from the server
+
+      if (response.ok) {
+        // Redirect to the registration-done page
+        navigate('/login-done', {
+          state: {
+          email,
+          },
+        });
+      }
+      else {
+        // Handle error messages
+        if (responseData.error.includes('email')) {
+          setErrorEmail(responseData.error);
+          setIsEmailInvalid(true);
+        }
+        else if (responseData.error.includes('password')) {
+          setErrorPassword(responseData.error);
+          setIsPasswordInvalid(true);
+      }
+    }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -58,7 +152,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <form onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <TextField
               margin="normal"
               required
@@ -68,6 +162,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              error={isEmailInvalid}
+              helperText={isEmailInvalid ? emailMessage : ''}
             />
             <TextField
               margin="normal"
@@ -78,6 +174,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={isPasswordInvalid}
+              helperText={isPasswordInvalid ? passwordMessage : ''}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -103,7 +201,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
             </Grid>
-          </Box>
+          </form>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
