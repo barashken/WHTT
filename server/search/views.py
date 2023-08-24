@@ -59,33 +59,37 @@ class OpenAIView(APIView):
 
 
     def create_prompt(self, country, city, days, adults_num, teens_num, children_num, trip_vibe, budget):
-        prompt = '''As a tour guide, build me a {} days trip to {}, {} for travelers {} adults, {} teens and {} childrens, the budget is {} for a {} trip. Give me an answer in JSON format, divided by days, for each day order me by attractions(3-4), 1 hotel and 2 restaurants, and give a short explanation and locations. I want the JSON to be no more than 800 words.
-    The JSON looks like this:
-    {{
-      "day": "Day1",
-      "attractions": [
-        {{
-          "name": "",
-          "location": "",
-          "description": ""
-        }},
-        ...
-      ],
-      "hotel": {{
-        "name": "",
-        "location": "",
-        "description": ""
-      }},
-      "restaurants": [
-        {{
-          "name": "",
-          "location": "",
-          "description": ""
-        }},
-        ...
-      ]
-    }}
-    '''.format(days, city, country, adults_num, teens_num, children_num, budget, trip_vibe)
+        prompt = '''As a tour guide, build me a {} days trip to {}, {}
+              for travelers {} adults, {} teens and {} childrens, the budget is {} for a {} trip.
+              Give me an answer in JSON format, divided by days, for each day order me by attractions(3-4),
+              1 hotel and 2 restaurants, and give a short explanation and locations and also short summary for the day.
+              I want the JSON to be no more than 800 words.
+              The JSON looks like this:
+              {{
+                "day": "Day1",
+                "attractions": [
+                  {{
+                    "name": "",
+                    "location": "",
+                    "description": ""
+                  }},
+                  ...
+                ],
+                "hotel": {{
+                  "name": "",
+                  "location": "",
+                  "description": ""
+                }},
+                "restaurants": [
+                  {{
+                    "name": "",
+                    "location": "",
+                    "description": ""
+                  }},
+                  ...
+                ]
+              }}
+              '''.format(days, city, country, adults_num, teens_num, children_num, budget, trip_vibe)
 
         return prompt
 

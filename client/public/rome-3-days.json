@@ -1,0 +1,127 @@
+{
+  "trip": {
+    "duration": "3 days",
+    "budget": "$1000",
+    "travelers": {
+      "adults": 2,
+      "teens": 2,
+      "children": 0
+    }
+  },
+  "itinerary": [
+    {
+      "day": 1,
+      "attractions": [
+        {
+          "name": "Colosseum",
+          "location": "Piazza del Colosseo, 1, 00184 Rome"
+        },
+        {
+          "name": "Roman Forum",
+          "location": "Via della Salara Vecchia, 5/6, 00186 Rome"
+        },
+        {
+          "name": "Palatine Hill",
+          "location": "Via di San Gregorio, 00186 Rome"
+        },
+        {
+          "name": "Capitoline Hill",
+          "location": "Piazza del Campidoglio, 1, 00186 Rome"
+        }
+      ],
+      "hotel": "Budget Inn Rome",
+      "hotel_location": "Via Palermo 12, Rome",
+      "restaurants": [
+        {
+          "name": "Trattoria da Lucia",
+          "location": "Via del Mattonato, 2, 00153 Rome"
+        },
+        {
+          "name": "Giolitti",
+          "location": "Via degli Uffici del Vicario, 40, 00186 Rome"
+        },
+        {
+          "name": "Pinsere",
+          "location": "Via Flavia, 98, 00187 Rome"
+        }
+      ],
+      "day_summary": "Start your trip by exploring ancient Rome. Visit the iconic Colosseum, marvel at the ruins of the Roman Forum, and enjoy the panoramic view from Palatine Hill. Wind down the day with a delicious meal at Trattoria da Lucia, known for its authentic Italian cuisine."
+    },
+    {
+      "day": 2,
+      "attractions": [
+        {
+          "name": "Vatican Museums",
+          "location": "Viale Vaticano, 00120 Vatican City"
+        },
+        {
+          "name": "Sistine Chapel",
+          "location": "Viale Vaticano, 00120 Vatican City"
+        },
+        {
+          "name": "St. Peter's Basilica",
+          "location": "Piazza San Pietro, 00120 Vatican City"
+        },
+        {
+          "name": "Castel Sant'Angelo",
+          "location": "Lungotevere Castello, 50, 00193 Rome"
+        }
+      ],
+      "hotel": "Budget Inn Rome",
+      "hotel_location": "Via Palermo 12, Rome",
+      "restaurants": [
+        {
+          "name": "La Zanzara",
+          "location": "Via Crescenzio, 84, 00193 Rome"
+        },
+        {
+          "name": "Pompi",
+          "location": "Via Albalonga, 7, 00183 Rome"
+        },
+        {
+          "name": "Pane e Salame",
+          "location": "Via di Santa Maria in Via, 19/25, 00187 Rome"
+        }
+      ],
+      "day_summary": "Immerse yourself in Vatican City's art and history. Explore the Vatican Museums, gaze at Michelangelo's masterpiece in the Sistine Chapel, and visit the awe-inspiring St. Peter's Basilica. Wrap up the day with delightful dining at La Zanzara, offering both local and international dishes."
+    },
+    {
+      "day": 3,
+      "attractions": [
+        {
+          "name": "Trevi Fountain",
+          "location": "Piazza di Trevi, 00187 Rome"
+        },
+        {
+          "name": "Pantheon",
+          "location": "Piazza della Rotonda, 00186 Rome"
+        },
+        {
+          "name": "Piazza Navona",
+          "location": "Piazza Navona, 00186 Rome"
+        },
+        {
+          "name": "Spanish Steps",
+          "location": "Piazza di Spagna, 00187 Rome"
+        }
+      ],
+      "hotel": "Budget Inn Rome",
+      "hotel_location": "Via Palermo 12, Rome",
+      "restaurants": [
+        {
+          "name": "Dar Filettaro",
+          "location": "Largo dei Librari, 88, 00186 Rome"
+        },
+        {
+          "name": "Antico Forno Roscioli",
+          "location": "Via dei Chiavari, 34, 00186 Rome"
+        },
+        {
+          "name": "Tazza d'Oro",
+          "location": "Via degli Orfani, 84, 00186 Rome"
+        }
+      ],
+      "day_summary": "Experience the charm of Rome's Baroque landmarks. Toss a coin into the Trevi Fountain, admire the impressive Pantheon, stroll through lively Piazza Navona, and climb the Spanish Steps for a scenic view. Relish the final day with traditional Roman dishes at Dar Filettaro."
+    }
+  ]
+}
