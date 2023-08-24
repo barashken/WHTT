@@ -11,6 +11,12 @@ const DayDetails = ({ day }) => {
           {dayTitle}
         </Typography>
 
+        <Typography variant="h6">
+          Day Summary:
+          <br />
+          {day.summary}
+        </Typography>
+
         <Typography variant="h6">Attractions:</Typography>
         <List>
           {attractions.map((attraction, index) => (
