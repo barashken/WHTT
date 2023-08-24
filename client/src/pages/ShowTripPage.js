@@ -1,8 +1,11 @@
 import React from 'react';
+import TripSummery from '../components/TripSummery';
 
 function ShowTripPage() {
     return (
         <div className="show-trip-page">
-            <h1>Show Trip Page</h1>
+            <TripSummery />
         </div>);
 }
+
+export default ShowTripPage;

@@ -7,7 +7,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/jura": "^5.0.5",
     "@mui/icons-material": "^5.14.1",
-    "@mui/material": "^5.14.1",
+    "@mui/material": "^5.14.6",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",

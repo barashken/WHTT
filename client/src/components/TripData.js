@@ -1,8 +1,6 @@
-[
-  {
+const tripData = [{
     "day": "Day 1",
-    "attractions": [
-      {
+    "attractions": [{
         "name": "Colosseum",
         "location": "Piazza del Colosseo, 1, 00184 Roma RM, Italy",
         "description": "Explore the iconic ancient amphitheater, a symbol of ancient Rome's grandeur."
@@ -23,8 +21,7 @@
       "location": "Via Nazionale, 22, 00184 Roma RM, Italy",
       "description": "A comfortable and stylish hotel in central Rome, offering modern amenities."
     },
-    "restaurants": [
-      {
+    "restaurants": [{
         "name": "La Carbonara",
         "location": "Via Panisperna, 214, 00184 Roma RM, Italy",
         "description": "Savor classic Roman cuisine, including the famous pasta alla carbonara."
@@ -36,11 +33,9 @@
       }
     ],
     "summary": "Begin your Roman adventure with visits to the Colosseum, Roman Forum, and Palatine Hill. Stay at the elegant Hotel Artemide and indulge in local flavors at La Carbonara and Pizzeria Baffetto."
-  },
-  {
+  }, {
     "day": "Day 2",
-    "attractions": [
-      {
+    "attractions": [{
         "name": "Vatican Museums",
         "location": "Viale Vaticano, 00165 Roma RM, Italy",
         "description": "Discover an extensive collection of art and history, including the renowned Sistine Chapel."
@@ -61,8 +56,7 @@
       "location": "Via Cicerone, 39, 00193 Roma RM, Italy",
       "description": "A charming hotel near Vatican City, providing a cozy retreat."
     },
-    "restaurants": [
-      {
+    "restaurants": [{
         "name": "Ristorante Al Pompiere",
         "location": "Via di Santa Maria dei Calderari, 38, 00186 Roma RM, Italy",
         "description": "Indulge in Roman specialties and wines in a rustic atmosphere."
@@ -74,11 +68,9 @@
       }
     ],
     "summary": "Immerse yourself in Vatican City's treasures at the Vatican Museums and St. Peter's Basilica. Then, explore Castel Sant'Angelo's history. Unwind at Hotel Isa and relish local cuisine at Ristorante Al Pompiere and Gelateria del Teatro."
-  },
-  {
+  }, {
     "day": "Day 3",
-    "attractions": [
-      {
+    "attractions": [{
         "name": "Trevi Fountain",
         "location": "Piazza di Trevi, 00187 Roma RM, Italy",
         "description": "Make a wish at the enchanting Baroque fountain, a must-see in Rome."
@@ -99,8 +91,7 @@
       "location": "Piazza Montecitorio, 131, 00186 Roma RM, Italy",
       "description": "A historic hotel offering elegance and comfort near Rome's main attractions."
     },
-    "restaurants": [
-      {
+    "restaurants": [{
         "name": "Hostaria Costanza",
         "location": "Piazza del Paradiso, 65, 00186 Roma RM, Italy",
         "description": "Delight in Roman dishes in a charming restaurant with rooftop seating."
@@ -112,5 +103,8 @@
       }
     ],
     "summary": "Conclude your Roman journey by tossing a coin into the Trevi Fountain and climbing the Spanish Steps. Explore the magnificent Pantheon before returning to the historic Hotel Nazionale. Relish local flavors at Hostaria Costanza and Dar Filettaro."
-  }
-]
+  }];
+
+  
+  export default tripData;
+  
