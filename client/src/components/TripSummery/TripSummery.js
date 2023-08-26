@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Container, Paper } from '@mui/material';
+import { Typography, Container, Drawer, List, ListItem, ListItemText, Divider, Box, Paper } from '@mui/material';
 import DayDetails from '../DayDetails'; // Assuming you have this component
 import './TripSummery.css';
 import tripData from '../TripData';
@@ -16,38 +16,60 @@ const TripSummery = () => {
   };
 
   return (
-    <Container maxWidth="md" className="trip-summary-container">
+    <Container maxWidth="lg" className="trip-summary-container">
       <Typography variant="h4" gutterBottom>
         Rome Trip Itinerary
       </Typography>
 
-      <div className="days-list">
-        {tripData.map((day, index) => (
-          <Paper
-            key={index}
-            className="day-summary"
-            onClick={() => handleDayClick(index)}
-          >
-            <Typography variant="subtitle1">
-              Day {index + 1}: {day.summary}
-            </Typography>
-          </Paper>
-        ))}
-      </div>
-
-      {selectedDay !== null && (
-        <div className="day-details-overlay">
-          <div className="day-details-modal">
-            <DayDetails day={tripData[selectedDay]} />
-            <button
-              onClick={handleCloseDayDetails}
-              className="close-day-button"
+      <Drawer
+        variant="permanent"
+        anchor="left"
+        className="day-drawer"
+      >
+        <List>
+          {tripData.map((day, index) => (
+            <ListItem
+              key={index}
+              button
+              onClick={() => handleDayClick(index)}
             >
-              Close Day
-            </button>
-          </div>
+              <ListItemText primary={`Day ${index + 1}`} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+
+      <Box className="day-details">
+        <div className="days-list">
+          {tripData.map((day, index) => (
+            <Paper
+              key={index}
+              className={`day-summary ${selectedDay === index ? 'selected' : ''}`}
+              onClick={() => handleDayClick(index)}
+            >
+              <Typography variant="subtitle1">
+                Day {index + 1}: {day.summary}
+              </Typography>
+            </Paper>
+          ))}
         </div>
-      )}
+
+        {selectedDay !== null && (
+          <div className="day-details-overlay">
+            <div className="day-details-modal">
+              <div className="day-details-content">
+                <DayDetails day={tripData[selectedDay]} />
+              </div>
+              <button
+                onClick={handleCloseDayDetails}
+                className="close-day-button"
+              >
+                Close Day
+              </button>
+            </div>
+          </div>
+        )}
+      </Box>
     </Container>
   );
 };

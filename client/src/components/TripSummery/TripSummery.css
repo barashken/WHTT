@@ -1,6 +1,7 @@
 .trip-summary-container {
   text-align: center;
   margin-top: 20px;
+  background-color: #f0f5ff; /* Blue background */
 }
 
 .trip-summary-paper {
@@ -18,10 +19,6 @@
 
 .trip-summary-item:hover {
   background-color: #f0f0f0;
-}
-
-.selected {
-  background-color: #d3d3d3;
 }
 
 .day-buttons-container {
@@ -60,12 +57,14 @@
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  max-width: 100%; /* Set the maximum width for the modal */
-  max-height: 100%; /* Set the maximum height for the modal */
+  max-width: 90%; /* Set the maximum width for the modal */
+  max-height: 90%; /* Set the maximum height for the modal */
   overflow: auto; /* Enable scrolling when content overflows */
-  margin: 10px; /* Add some margin for spacing */
+  margin: auto; /* Center-align the modal */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Create a 2-column grid */
+  gap: 20px; /* Add some gap between the columns */
+  align-items: start; /* Align grid items to the top */
 }
 
 .close-day-button {
@@ -103,3 +102,24 @@
   background-color: #d3d3d3;
 }
 
+.day-drawer {
+  width: 240px;
+}
+
+.day-summary {
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.selected {
+  background-color: #d3d3d3;
+}
+
+.day-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px;
+}
