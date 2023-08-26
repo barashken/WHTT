@@ -1,5 +1,5 @@
 import React from 'react';
-import TripSummery from '../components/TripSummery';
+import TripSummery from '../components/TripSummery/TripSummery';
 
 function ShowTripPage() {
     return (
