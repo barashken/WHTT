@@ -1,7 +1,6 @@
 .trip-summary-container {
   text-align: center;
   margin-top: 20px;
-  background-color: #f0f5ff; /* Blue background */
 }
 
 .trip-summary-paper {
@@ -123,3 +122,42 @@
   padding: 20px;
   gap: 20px;
 }
+
+.trip-summary-table {
+  margin-top: 30px;
+  text-align: center; /* Center the table */
+}
+
+.trip-summary-table table {
+  width: 80%; /* Adjust the table width as needed */
+  margin: 0 auto; /* Center the table */
+  border-collapse: separate; /* Separate borders for cells */
+  border-spacing: 8px; /* Add spacing between cells */
+  background-color: #f0f0f0; /* Light background color */
+  border-radius: 20px; /* Rounded corners */
+}
+
+.trip-summary-table td {
+  padding: 20px;
+  line-height: 1.4; /* Adjust the line height */
+  border-radius: 10px; /* Rounded corners for cells */
+}
+
+.trip-summary-table td:first-child {
+  width: 15%; /* Adjust the day column width */
+  padding-left: 30px; /* Add some padding to the left of the day cell */
+}
+
+.trip-summary-table tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.trip-summary-table tr:hover {
+  background-color: #e0e0e0; 
+}
+
+.trip-summary-table .selected {
+  background-color: #d3d3d3;
+}
+

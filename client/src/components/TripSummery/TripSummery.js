@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Container, Drawer, List, ListItem, ListItemText, Divider, Box, Paper } from '@mui/material';
+import { Typography, Container, Drawer, List, ListItem, ListItemText, Box, Paper } from '@mui/material';
 import DayDetails from '../DayDetails'; // Assuming you have this component
 import './TripSummery.css';
 import tripData from '../TripData';
@@ -40,36 +40,39 @@ const TripSummery = () => {
       </Drawer>
 
       <Box className="day-details">
-        <div className="days-list">
-          {tripData.map((day, index) => (
-            <Paper
-              key={index}
-              className={`day-summary ${selectedDay === index ? 'selected' : ''}`}
-              onClick={() => handleDayClick(index)}
-            >
-              <Typography variant="subtitle1">
-                Day {index + 1}: {day.summary}
-              </Typography>
-            </Paper>
-          ))}
+        <div className="trip-summary-table">
+          <table>
+            <tbody>
+              {tripData.map((day, index) => (
+                <tr
+                  key={index}
+                  className={`day-summary ${selectedDay === index ? 'selected' : ''}`}
+                  onClick={() => handleDayClick(index)}
+                >
+                  <td>Day {index + 1}</td>
+                  <td>{day.summary}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-
-        {selectedDay !== null && (
-          <div className="day-details-overlay">
-            <div className="day-details-modal">
-              <div className="day-details-content">
-                <DayDetails day={tripData[selectedDay]} />
-              </div>
-              <button
-                onClick={handleCloseDayDetails}
-                className="close-day-button"
-              >
-                Close Day
-              </button>
-            </div>
-          </div>
-        )}
       </Box>
+
+      {selectedDay !== null && (
+        <div className="day-details-overlay">
+          <div className="day-details-modal">
+            <div className="day-details-content">
+              <DayDetails day={tripData[selectedDay]} />
+            </div>
+            <button
+              onClick={handleCloseDayDetails}
+              className="close-day-button"
+            >
+              Close Day
+            </button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
