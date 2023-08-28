@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Welcome = () => {
   const buttonStyle = {
@@ -37,7 +38,7 @@ const Welcome = () => {
           that will leave you with memories for a lifetime!
         </Typography>
         <Box my={2} />
-        <Button style={buttonStyle} variant="contained">
+        <Button style={buttonStyle} variant="contained" component={Link} to="/travel-form">
           Find Your Trip
         </Button>
       </Box>

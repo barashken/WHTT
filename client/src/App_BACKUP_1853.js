@@ -17,9 +17,13 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/registration-done" element={<RegistrationDonePage />} />
         <Route path="/login-done" element={<LoginDonePage />} />
+<<<<<<< HEAD
         <Route path="/show-trip" element={<ShowTripPage />} />
+=======
+        <Route path="/" element={<LandingPage />} />
         <Route path="/travel-form" element={<TravelFormPage />} />
 
+>>>>>>> 215239d64ad9239856c331a6758e93ac450f97af
       </Routes>
     </Router>
   );
