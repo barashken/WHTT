@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Typography, Container, Box, Button } from '@mui/material';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import Geocode from 'react-geocode'; // Install this package
 import DayDetails from '../DayDetails'; // Assuming you have this component
 import './TripSummery.css';
 import tripData from '../TripData';
 
 const TripSummery = () => {
   const [selectedDay, setSelectedDay] = useState(null);
+  const [apiError, setApiError] = useState(false);
+  const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
+  Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
   const handleDayClick = (dayIndex) => {
     setSelectedDay(dayIndex);
@@ -22,6 +26,17 @@ const TripSummery = () => {
 
   const handleCloseDayDetails = () => {
     setSelectedDay(null);
+  };
+
+  const handleGeocode = async () => {
+    try {
+      const response = await Geocode.fromAddress('Rome, Italy');
+      const { lat, lng } = response.results[0].geometry.location;
+      // Update the map's center
+      setMapCenter({ lat, lng });
+    } catch (error) {
+      console.error('Error geocoding city:', error);
+    }
   };
 
   const buttonStyle = {
@@ -67,15 +82,21 @@ const TripSummery = () => {
               <DayDetails day={tripData[selectedDay]} />
             </div>
             <div className="map-container">
-              <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+              <LoadScript
+              googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+              onError={() => setApiError(true)}
+              >
                 <GoogleMap
                   mapContainerStyle={{ width: '100%', height: '100%' }}
-                  center={{ lat: 44 /* Latitude */, lng: 44 /* Longitude */ }}
+                  center={mapCenter}
                   zoom={10}
                 >
-                  <Marker position={{ lat: 44 /* Latitude */, lng: 44 /* Longitude */ }} />
+                  <Marker position={mapCenter} />
                 </GoogleMap>
               </LoadScript>
+              {apiError && (
+                <div className="error-message">Error loading Google Maps API. Please check your API key.</div>
+              )}
             </div>
             <div className="navigation-buttons">
               {selectedDay > 0 && (
