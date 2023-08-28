@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+client/src/.env
+
 # dependencies
 client/node_modules
 /.pnp
@@ -24,3 +26,4 @@ client/src/.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+client/src/.env
