@@ -5,6 +5,7 @@ client/node_modules
 /.pnp
 .pnp.js
 .pyc
+client/src/.env
 
 # testing
 /coverage
