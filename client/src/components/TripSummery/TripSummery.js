@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Typography, Container, Drawer, List, ListItem, ListItemText, Box, Paper } from '@mui/material';
+import { Typography, Container, Box, Button } from '@mui/material';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import DayDetails from '../DayDetails'; // Assuming you have this component
 import './TripSummery.css';
 import tripData from '../TripData';
@@ -15,29 +16,22 @@ const TripSummery = () => {
     setSelectedDay(null);
   };
 
+  const buttonStyle = {
+    borderRadius: '50px',
+        display: 'inline-flex',
+        textTransform: 'none', // To prevent uppercase text
+        fontWeight: 'bold', // Set font weight if needed
+        fontFamily: 'Jura, Arial, sans-serif',
+        padding: '5px 30px',
+        gap: '10px',
+        fontSize: '1.5rem',
+  };
+
   return (
     <Container maxWidth="lg" className="trip-summary-container">
       <Typography variant="h4" gutterBottom>
         Rome Trip Itinerary
       </Typography>
-
-      <Drawer
-        variant="permanent"
-        anchor="left"
-        className="day-drawer"
-      >
-        <List>
-          {tripData.map((day, index) => (
-            <ListItem
-              key={index}
-              button
-              onClick={() => handleDayClick(index)}
-            >
-              <ListItemText primary={`Day ${index + 1}`} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
 
       <Box className="day-details">
         <div className="trip-summary-table">
@@ -64,12 +58,26 @@ const TripSummery = () => {
             <div className="day-details-content">
               <DayDetails day={tripData[selectedDay]} />
             </div>
-            <button
+            <div className="map-container">
+            <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} >
+                <GoogleMap
+                  mapContainerStyle={{ width: '100%', height: '100%' }}
+                  center={{lat: 44 /* Latitude */, lng: 44 /* Longitude */}}
+                  zoom={10}
+                >
+                  {/* Markers or other map components */}
+                  <Marker position={{ lat: 44 /* Latitude */, lng: 44 /* Longitude */ }} />
+                </GoogleMap>
+              </LoadScript>
+            </div>
+            <Button
               onClick={handleCloseDayDetails}
               className="close-day-button"
+              style={buttonStyle}
+              variant="contained"
             >
               Close Day
-            </button>
+            </Button>
           </div>
         </div>
       )}

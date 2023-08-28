@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, List, ListItem, ListItemText, Container, Card } from '@mui/material';
+import { Typography, Container, Card } from '@mui/material';
 
 const DayDetails = ({ day }) => {
   const { attractions, hotel, restaurants, day: dayTitle } = day;
@@ -11,26 +11,41 @@ const DayDetails = ({ day }) => {
     return baseUrl + formattedLocation + "+" + formattedName;
   };
 
-  const renderList = (list, type) => (
-    <List>
-      {list.map((item, index) => (
-        <ListItem key={index}>
-          <ListItemText
-            primary={<strong>{item.name}</strong>}
-            secondary={item.description}
-          />
-          <ListItemText primary={`Location: ${item.location}`} />
-          <a href={generateMapUrl(item.location, item.name)} target="_blank" rel="noopener noreferrer">
-            View on Google Maps
-          </a>
-        </ListItem>
-      ))}
-    </List>
+  const renderTable = (list) => (
+    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <tbody>
+        {list.map((item, index) => (
+          <tr key={index} style={{ borderBottom: '1px solid #ccc' }}>
+            <td style={{width: '50%', padding: '10px', textAlign: 'left' }}>
+            <Typography variant="body1">
+              <strong>{item.name}</strong>
+            </Typography>
+            <Typography variant="body2" color="textSecondary" style={{ fontSize: '15px' }}>
+              {item.description}
+            </Typography>
+            </td>
+            <td style={{width: '40%', padding: '10px', textAlign: 'left' }}>
+            <Typography variant="body1">
+              <strong>Location:</strong>
+            </Typography>
+            <Typography variant="body2" color="textSecondary" style={{ fontSize: '15px' }}>
+              {item.location}
+            </Typography>
+            </td>
+            <td style={{width: '70%', textAlign: 'left' }}>
+              <a href={generateMapUrl(item.location, item.name)} target="_blank" rel="noopener noreferrer">
+                View on Google Maps
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 
   return (
-    <Container maxWidth="md" style={{ marginTop: '20px' }}>
-      <Card elevation={3} style={{ padding: '20px' }}>
+    <Container style={{width: '90%', marginTop: '20px', alignContent: 'center' }}>
+      <Card elevation={3} style={{width: '100%', padding: '20px' }}>
         <Typography variant="h5" gutterBottom>
           {dayTitle}
         </Typography>
@@ -38,26 +53,30 @@ const DayDetails = ({ day }) => {
         <Typography variant="h6">
           Day Summary:
           <br />
+          <Typography variant="body1">
           {day.summary}
+          </Typography>
         </Typography>
-
+        <br />
         <Typography variant="h6">Hotel:</Typography>
         <Typography variant="body1">
           <strong>{hotel.name}</strong>
           <br />
           {hotel.description}
           <br />
-          Location: {hotel.location}
+          <strong>Location:</strong> {hotel.location}
         </Typography>
         <a href={generateMapUrl(hotel.location, hotel.name)} target="_blank" rel="noopener noreferrer">
-            View on Google Maps
+          View on Google Maps
         </a>
-
+        <br />
+        <br />
         <Typography variant="h6">Attractions:</Typography>
-        {renderList(attractions, "Attraction")}
+        {renderTable(attractions)}
+        <br />
 
         <Typography variant="h6">Restaurants:</Typography>
-        {renderList(restaurants, "Restaurant")}
+        {renderTable(restaurants)}
       </Card>
     </Container>
   );
