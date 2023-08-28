@@ -16,7 +16,7 @@ const DayDetails = ({ day }) => {
       <tbody>
         {list.map((item, index) => (
           <tr key={index} style={{ borderBottom: '1px solid #ccc' }}>
-            <td style={{width: '50%', padding: '10px', textAlign: 'left' }}>
+            <td style={{width: '48%', padding: '10px', textAlign: 'left' }}>
             <Typography variant="body1">
               <strong>{item.name}</strong>
             </Typography>
@@ -44,7 +44,7 @@ const DayDetails = ({ day }) => {
   );
 
   return (
-    <Container style={{width: '90%', marginTop: '20px', alignContent: 'center' }}>
+    <Container style={{width: '100%', alignContent: 'center', marginLeft: '-25px', borderRadius: '30px' }}>
       <Card elevation={3} style={{width: '100%', padding: '20px' }}>
         <Typography variant="h5" gutterBottom>
           {dayTitle}

@@ -12,6 +12,14 @@ const TripSummery = () => {
     setSelectedDay(dayIndex);
   };
 
+  const handleNavigation = (direction) => {
+    if (direction === 'previous' && selectedDay > 0) {
+      setSelectedDay(selectedDay - 1);
+    } else if (direction === 'next' && selectedDay < tripData.length - 1) {
+      setSelectedDay(selectedDay + 1);
+    }
+  };
+
   const handleCloseDayDetails = () => {
     setSelectedDay(null);
   };
@@ -59,25 +67,46 @@ const TripSummery = () => {
               <DayDetails day={tripData[selectedDay]} />
             </div>
             <div className="map-container">
-            <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY} >
+              <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
                 <GoogleMap
                   mapContainerStyle={{ width: '100%', height: '100%' }}
-                  center={{lat: 44 /* Latitude */, lng: 44 /* Longitude */}}
+                  center={{ lat: 44 /* Latitude */, lng: 44 /* Longitude */ }}
                   zoom={10}
                 >
-                  {/* Markers or other map components */}
                   <Marker position={{ lat: 44 /* Latitude */, lng: 44 /* Longitude */ }} />
                 </GoogleMap>
               </LoadScript>
             </div>
-            <Button
-              onClick={handleCloseDayDetails}
-              className="close-day-button"
-              style={buttonStyle}
-              variant="contained"
-            >
-              Close Day
-            </Button>
+            <div className="navigation-buttons">
+              {selectedDay > 0 && (
+                <Button
+                  onClick={() => handleNavigation('previous')}
+                  className="navigation-button previous-button"
+                  style={buttonStyle}
+                  variant="contained"
+                >
+                  &lt; Previous
+                </Button>
+              )}
+              <Button
+                onClick={handleCloseDayDetails}
+                className="navigation-button close-day-button"
+                style={buttonStyle}
+                variant="contained"
+              >
+                Close Day
+              </Button>
+              {selectedDay < tripData.length - 1 && (
+                <Button
+                  onClick={() => handleNavigation('next')}
+                  className="navigation-button next-button"
+                  style={buttonStyle}
+                  variant="contained"
+                >
+                  Next &gt;
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       )}
