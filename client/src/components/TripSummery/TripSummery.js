@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Container, Box, Button } from '@mui/material';
-import Geocode from 'react-geocode';
 import DayDetails from '../DayDetails';
 import './TripSummery.css';
 import tripData from '../TripData';
@@ -11,25 +10,6 @@ const TripSummery = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [apiError, setApiError] = useState(false);
   const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
-
-  useEffect(() => {
-    // Function to fetch and set the map center coordinates for Rome, Italy
-    // const handleGeocode = async () => {
-    //   try {
-    //     const response = await Geocode.fromAddress('Rome, Italy');
-    //     const { lat, lng } = response.results[0].geometry.location;
-    //     // Update the map's center
-    //     setMapCenter({ lat, lng });
-    //   } catch (error) {
-    //     console.error('Error geocoding city:', error);
-    //     setApiError(true); // Set error state if geocoding fails
-    //   }
-    // };
-
-    if (selectedDay !== null) {
-      // handleGeocode(); // Call geocoding function when a day is selected
-    }
-  }, [selectedDay]);
 
   const handleDayClick = (dayIndex) => {
     setSelectedDay(dayIndex);
@@ -90,7 +70,7 @@ const TripSummery = () => {
               <DayDetails day={tripData[selectedDay]} />
             </div>
             <div className="map-container">
-              <GoogleMap />
+              <GoogleMap day={tripData[selectedDay]} />
             </div>
             <div className="navigation-buttons">
               {selectedDay > 0 && (

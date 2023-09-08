@@ -58,7 +58,7 @@ const DayDetails = ({ day }) => {
           </Typography>
         </Typography>
         <br />
-        <Typography variant="h6">Hotel:</Typography>
+        <Typography variant="h6" style={{ color: 'blue' }}>Hotel:</Typography>
         <Typography variant="body1">
           <strong>{hotel.name}</strong>
           <br />
@@ -71,11 +71,11 @@ const DayDetails = ({ day }) => {
         </a>
         <br />
         <br />
-        <Typography variant="h6">Attractions:</Typography>
+        <Typography variant="h6" style={{ color: 'green' }}>Attractions:</Typography>
         {renderTable(attractions)}
         <br />
 
-        <Typography variant="h6">Restaurants:</Typography>
+        <Typography variant="h6" style={{ color: 'red' }}>Restaurants:</Typography>
         {renderTable(restaurants)}
       </Card>
     </Container>
