@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Container, Box, Button } from '@mui/material';
-import { useJsApiLoader, GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Geocode from 'react-geocode';
 import DayDetails from '../DayDetails';
 import './TripSummery.css';
 import tripData from '../TripData';
+import GoogleMap from '../GoogleMap';
 
 
 const TripSummery = () => {
@@ -90,21 +90,7 @@ const TripSummery = () => {
               <DayDetails day={tripData[selectedDay]} />
             </div>
             <div className="map-container">
-              {/* <LoadScript
-                googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-                onError={() => setApiError(true)}
-              >
-                <GoogleMap
-                  mapContainerStyle={{ width: '100%', height: '100%' }}
-                  center={mapCenter}
-                  zoom={10}
-                >
-                  <Marker position={mapCenter} />
-                </GoogleMap>
-              </LoadScript>
-              {apiError && (
-                <div className="error-message">Error loading Google Maps API. Please check your API key.</div>
-              )} */}
+              <GoogleMap />
             </div>
             <div className="navigation-buttons">
               {selectedDay > 0 && (

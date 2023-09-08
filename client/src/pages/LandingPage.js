@@ -9,7 +9,7 @@ function LandingPage() {
         <div className="landing-page">
             <TopBar />
             <Welcome />
-            <TripsGallery />
+            {/* <TripsGallery /> */}
         </div>);
 }
 
