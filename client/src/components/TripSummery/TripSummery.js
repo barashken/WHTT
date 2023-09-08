@@ -6,6 +6,7 @@ import DayDetails from '../DayDetails';
 import './TripSummery.css';
 import tripData from '../TripData';
 
+
 const TripSummery = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [apiError, setApiError] = useState(false);
@@ -13,26 +14,22 @@ const TripSummery = () => {
 
   useEffect(() => {
     // Function to fetch and set the map center coordinates for Rome, Italy
-    const handleGeocode = async () => {
-      try {
-        const response = await Geocode.fromAddress('Rome, Italy');
-        const { lat, lng } = response.results[0].geometry.location;
-        // Update the map's center
-        setMapCenter({ lat, lng });
-      } catch (error) {
-        console.error('Error geocoding city:', error);
-        setApiError(true); // Set error state if geocoding fails
-      }
-    };
+    // const handleGeocode = async () => {
+    //   try {
+    //     const response = await Geocode.fromAddress('Rome, Italy');
+    //     const { lat, lng } = response.results[0].geometry.location;
+    //     // Update the map's center
+    //     setMapCenter({ lat, lng });
+    //   } catch (error) {
+    //     console.error('Error geocoding city:', error);
+    //     setApiError(true); // Set error state if geocoding fails
+    //   }
+    // };
 
     if (selectedDay !== null) {
-      handleGeocode(); // Call geocoding function when a day is selected
+      // handleGeocode(); // Call geocoding function when a day is selected
     }
   }, [selectedDay]);
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
 
   const handleDayClick = (dayIndex) => {
     setSelectedDay(dayIndex);
@@ -93,7 +90,7 @@ const TripSummery = () => {
               <DayDetails day={tripData[selectedDay]} />
             </div>
             <div className="map-container">
-              <LoadScript
+              {/* <LoadScript
                 googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
                 onError={() => setApiError(true)}
               >
@@ -107,7 +104,7 @@ const TripSummery = () => {
               </LoadScript>
               {apiError && (
                 <div className="error-message">Error loading Google Maps API. Please check your API key.</div>
-              )}
+              )} */}
             </div>
             <div className="navigation-buttons">
               {selectedDay > 0 && (
