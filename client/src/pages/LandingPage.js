@@ -9,7 +9,7 @@ const LandingPage = () => {
         <div className="landing-page">
             <TopBar />
             <Welcome />
-            <p style={{ margin: '50px' }}>Paragraph 1</p>
+            <p style={{ margin: '100px' }}></p>
             <TripsGallery />
         </div>);
 }
