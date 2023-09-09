@@ -139,8 +139,8 @@
   margin: 0 auto; /* Center the table */
   border-collapse: separate; /* Separate borders for cells */
   border-spacing: 8px; /* Add spacing between cells */
-  background-color: #f0f0f0; /* Light background color */
-  border-radius: 20px; /* Rounded corners */
+  background-color: rgba(240, 240, 240, 0.5); /* Light background color with opacity */
+  border-radius: 30px; /* Rounded corners */
 }
 
 .trip-summary-table td {
@@ -152,19 +152,23 @@
 .trip-summary-table td:first-child {
   width: 15%; /* Adjust the day column width */
   padding-left: 30px; /* Add some padding to the left of the day cell */
+  border-radius: 30px; /* Rounded corners */
 }
 
 .trip-summary-table tr {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  border-radius: 30px; /* Rounded corners */
 }
 
 .trip-summary-table tr:hover {
-  background-color: #e0e0e0; 
+  background-color: #e0e0e0;
+  border-radius: 30px; /* Rounded corners */
 }
 
 .trip-summary-table .selected {
   background-color: #d3d3d3;
+  border-radius: 30px; /* Rounded corners */
 }
 
 .navigation-buttons {

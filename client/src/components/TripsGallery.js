@@ -1,45 +1,96 @@
 import React from 'react';
-import { Outlet, Route } from 'react-router-dom';
 import TripWindow from './TripWindow';
-import ShowTripPage from '../pages/ShowTripPage';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles'; // Import styled from @mui/material/styles
+
+const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column', // Display items vertically
+  alignItems: 'center', // Center items horizontally
+  textAlign: 'center', // Center text within the container
+};
 
 const galleryStyle = {
-    display: 'flex',
-    flexDirection: 'column', // Stack frames vertically
-    alignItems: 'center', // Center frames horizontally
-  };
+  display: 'flex',
+  flexDirection: 'row', // Display frames side by side
+  alignItems: 'center', // Center frames vertically
+  justifyContent: 'center', // Center frames horizontally
+};
+
+const tripWindowStyle = {
+  margin: '10px', // Add some margin to create intervals between TripWindows
+};
+
+const LogoImage = styled('img')({
+  height: 60, // Adjust the height to your desired size
+  marginRight: 16,
+});
 
 const TripsGallery = () => {
   const pictures = [
     {
       id: 1,
-      imageSrc: '/public/rome.jpg',
-      inscription: 'Rome Trip',
+      imageSrc: '/rome.jpg',
+      text: 'Rome Trip',
     },
     {
       id: 2,
-      imageSrc: '/public/berlin.jpg',
-      inscription: 'Berlin Trip',
+      imageSrc: '/berlin.jpg',
+      text: 'Berlin Trip',
     },
     // Add more pictures as needed
   ];
 
   return (
-    <Outlet>
-      <Route exact path="/">
-        <div style={galleryStyle} className="picture-gallery">
-          {pictures.map((picture) => (
+    <div>
+      <Typography
+        variant="h2"
+        component="h2"
+        gutterBottom
+        fontFamily="Jura, Arial, sans-serif"
+        style={{
+           textAlign: 'left',
+           fontWeight: 'bold',
+           }}
+      >
+        Discover the world with{' '} 
+        <LogoImage src="\wuttlogo2.png"/>
+      </Typography>
+      <Typography
+        variant="h4"
+        component="h4"
+        gutterBottom
+        fontFamily="Jura, Arial, sans-serif"
+        style={{ textAlign: 'left' }} // Align text to the left
+      >
+        Don't just visit places - experience them like a local!
+        <br />With WUTT's unique trips, you'll get to know the real city, not just the tourist traps.
+      </Typography>
+      <p style={{ margin: '60px' }}></p>
+      <Typography
+        variant="h2"
+        component="h2"
+        gutterBottom
+        fontFamily="Jura, Arial, sans-serif"
+        style={{
+           textAlign: 'center',
+           fontWeight: 'bold',
+          }}
+      >
+        Favorite Trips 
+      </Typography>
+      <div style={galleryStyle}>
+        {pictures.map((picture) => (
+          <div style={tripWindowStyle} key={picture.id}>
             <TripWindow
-              key={picture.id}
-              imageSrc={picture.imageSrc}
-              inscription={picture.inscription}
-              tripDetailsPath={`/show-trip/${picture.id}`}
+              id={picture.id}
+              imageUrl={picture.imageSrc}
+              text={picture.text}
             />
-          ))}
-        </div>
-      </Route>
-      <Route path="/show-trip/:id" component={ShowTripPage} />
-    </Outlet>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

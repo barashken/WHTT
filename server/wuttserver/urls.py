@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from search.views import OpenAIView
 from users.views import RegisterView, LoginView, LogoutView
+from trips.views import GetTripView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('get-trip/<int:id>/', GetTripView.as_view(), name='get-trip'),
 ]
