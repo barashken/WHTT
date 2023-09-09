@@ -4,12 +4,13 @@ import Welcome from '../components/Welcome';
 import TopBar from '../components/TopBar';
 import TripsGallery from '../components/TripsGallery';
 
-function LandingPage() {
+const LandingPage = () => {
     return (
         <div className="landing-page">
             <TopBar />
             <Welcome />
-            {/* <TripsGallery /> */}
+            <p style={{ margin: '50px' }}>Paragraph 1</p>
+            <TripsGallery />
         </div>);
 }
 

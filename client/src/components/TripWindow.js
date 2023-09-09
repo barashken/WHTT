@@ -1,5 +1,7 @@
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
 
 const frameStyle = {
     width: '200px', // Set the desired width for your frames
@@ -19,15 +21,32 @@ const frameStyle = {
     maxHeight: '100%',
   };
 
-const TripWindow = ({ imageSrc, inscription, tripDetailsPath }) => {
+const TripWindow = ({ imageUrl, text, onClick, navigateTo }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (navigateTo) {
+      navigate(navigateTo);
+    }
+
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <div style={frameStyle} className="frame">
-      <Link to={tripDetailsPath} style={{ textDecoration: 'none'}}>
-        <img src={imageSrc} alt="Trip" style={imageStyle} />
-        <div className="inscription">{inscription}</div>
-      </Link>
-    </div>
+    <Card style={frameStyle}>
+      <CardActionArea onClick={handleClick}>
+        <img src={imageUrl} alt="Trip" style={imageStyle} />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {text}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
 export default TripWindow;
+

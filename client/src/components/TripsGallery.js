@@ -1,45 +1,65 @@
 import React from 'react';
-import { Outlet, Route } from 'react-router-dom';
 import TripWindow from './TripWindow';
-import ShowTripPage from '../pages/ShowTripPage';
+import Typography from '@mui/material/Typography';
+
+const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column', // Display items vertically
+  alignItems: 'center', // Center items horizontally
+  textAlign: 'center', // Center text within the container
+};
 
 const galleryStyle = {
-    display: 'flex',
-    flexDirection: 'column', // Stack frames vertically
-    alignItems: 'center', // Center frames horizontally
-  };
+  display: 'flex',
+  flexDirection: 'row', // Display frames side by side
+  alignItems: 'center', // Center frames vertically
+  justifyContent: 'center', // Center frames horizontally
+};
+
+const tripWindowStyle = {
+  margin: '10px', // Add some margin to create intervals between TripWindows
+};
 
 const TripsGallery = () => {
+  const handleTripClick = () => {
+    // Handle click logic here
+    console.log('Trip clicked!');
+  };
+
   const pictures = [
     {
       id: 1,
-      imageSrc: '/public/rome.jpg',
-      inscription: 'Rome Trip',
+      imageSrc: '/rome.jpg',
+      text: 'Rome Trip',
+      navigateTo: '/show-trip',
     },
     {
       id: 2,
-      imageSrc: '/public/berlin.jpg',
-      inscription: 'Berlin Trip',
+      imageSrc: '/berlin.jpg',
+      text: 'Berlin Trip',
+      navigateTo: '/show-trip',
     },
     // Add more pictures as needed
   ];
 
   return (
-    <Outlet>
-      <Route exact path="/">
-        <div style={galleryStyle} className="picture-gallery">
-          {pictures.map((picture) => (
+    <div style={containerStyle} className="picture-gallery">
+      <Typography variant="h4" component="h4" gutterBottom fontFamily="Jura, Arial, sans-serif">
+        Take a look at our travel gallery:
+      </Typography>
+      <div style={galleryStyle}>
+        {pictures.map((picture) => (
+          <div style={tripWindowStyle} key={picture.id}>
             <TripWindow
-              key={picture.id}
-              imageSrc={picture.imageSrc}
-              inscription={picture.inscription}
-              tripDetailsPath={`/show-trip/${picture.id}`}
+              imageUrl={picture.imageSrc}
+              text={picture.text}
+              onClick={handleTripClick}
+              navigateTo={picture.navigateTo}
             />
-          ))}
-        </div>
-      </Route>
-      <Route path="/show-trip/:id" component={ShowTripPage} />
-    </Outlet>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
