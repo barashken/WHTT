@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
 
 const frameStyle = {
-  width: '200px',
-  height: '250px',
+  width: '250px',
+  height: '310px',
   border: '2px solid #000',
   padding: '0',
   position: 'relative',
@@ -30,6 +30,7 @@ const textContainerStyle = {
   background: 'rgba(0, 0, 0, 0.7)', // Semi-transparent background for readability
   color: 'white', // Text color
   padding: '8px', // Add some padding to the text container
+  paddingTop: '1px', // Add padding to the top to move text higher
   textAlign: 'center', // Center text horizontally within the frame
 };
 
@@ -55,7 +56,7 @@ const TripWindow = ({ imageUrl, text, onClick, navigateTo }) => {
       <CardActionArea onClick={handleClick}>
         <img src={imageUrl} alt="Trip" style={imageStyle} />
         <CardContent style={textContainerStyle}>
-          <Typography variant="body2" component="p" style={textStyles}>
+          <Typography variant="h4" component="p" style={textStyles} fontFamily="Jura, Arial, sans-serif">
             {text}
           </Typography>
         </CardContent>

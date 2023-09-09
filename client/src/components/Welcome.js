@@ -29,6 +29,7 @@ const Welcome = () => {
         <Typography variant="h1" gutterBottom fontFamily="Jura, Arial, sans-serif">
           Find Yourself Outside
         </Typography>
+        <p style={{ margin: '10px' }}></p>
         <Box my={1} />
         <Typography variant="h4" color="textSecondary" gutterBottom fontFamily="Quattrocento, Georgia, serif">
           Plan an unforgettable trip
@@ -37,7 +38,9 @@ const Welcome = () => {
         <Typography variant="h4" color="textSecondary" gutterBottom fontFamily="Quattrocento, Georgia, serif">
           that will leave you with memories for a lifetime!
         </Typography>
+        <p style={{ margin: '10px' }}></p>
         <Box my={2} />
+        <p style={{ margin: '10px' }}></p>
         <Button style={buttonStyle} variant="contained" component={Link} to="/travel-form">
           Find Your Trip
         </Button>

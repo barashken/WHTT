@@ -1,6 +1,7 @@
 import React from 'react';
 import TripWindow from './TripWindow';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles'; // Import styled from @mui/material/styles
 
 const containerStyle = {
   display: 'flex',
@@ -19,6 +20,11 @@ const galleryStyle = {
 const tripWindowStyle = {
   margin: '10px', // Add some margin to create intervals between TripWindows
 };
+
+const LogoImage = styled('img')({
+  height: 60, // Adjust the height to your desired size
+  marginRight: 16,
+});
 
 const TripsGallery = () => {
   const handleTripClick = () => {
@@ -43,9 +49,42 @@ const TripsGallery = () => {
   ];
 
   return (
-    <div style={containerStyle} className="picture-gallery">
-      <Typography variant="h4" component="h4" gutterBottom fontFamily="Jura, Arial, sans-serif">
-        Take a look at our travel gallery:
+    <div>
+      <Typography
+        variant="h2"
+        component="h2"
+        gutterBottom
+        fontFamily="Jura, Arial, sans-serif"
+        style={{
+           textAlign: 'left',
+           fontWeight: 'bold',
+           }}
+      >
+        Discover the world with{' '} 
+        <LogoImage src="\wuttlogo2.png"/>
+      </Typography>
+      <Typography
+        variant="h4"
+        component="h4"
+        gutterBottom
+        fontFamily="Jura, Arial, sans-serif"
+        style={{ textAlign: 'left' }} // Align text to the left
+      >
+        Don't just visit places - experience them like a local!
+        <br />With WUTT's unique trips, you'll get to know the real city, not just the tourist traps.
+      </Typography>
+      <p style={{ margin: '60px' }}></p>
+      <Typography
+        variant="h2"
+        component="h2"
+        gutterBottom
+        fontFamily="Jura, Arial, sans-serif"
+        style={{
+           textAlign: 'center',
+           fontWeight: 'bold',
+          }}
+      >
+        Favorite Trips 
       </Typography>
       <div style={galleryStyle}>
         {pictures.map((picture) => (
