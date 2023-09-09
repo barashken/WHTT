@@ -3,6 +3,7 @@ import './LandingPage.css';
 import Welcome from '../components/Welcome';
 import TopBar from '../components/TopBar';
 import TripsGallery from '../components/TripsGallery';
+import HowMagicWork from '../components/HowMagicWork';
 
 const LandingPage = () => {
   return (
@@ -13,6 +14,7 @@ const LandingPage = () => {
       <p style={{ margin: '120px' }}></p>
       <div className="white-background">
         <TripsGallery />
+        <HowMagicWork />  
       </div>
     </div>
   );
