@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
+import { backendUrl } from '../constants';
 
 const frameStyle = {
   width: '250px',
@@ -38,16 +39,30 @@ const textStyles = {
   margin: '0', // Remove margin for the text
 };
 
-const TripWindow = ({ imageUrl, text, onClick, navigateTo }) => {
-  const navigate = useNavigate();
+const TripWindow = ({ id, imageUrl, text }) => {
+  const navigate = useNavigate(); 
 
-  const handleClick = () => {
-    if (navigateTo) {
-      navigate(navigateTo);
-    }
+  const handleClick = async () => {
+    try {
+      const response = await fetch(backendUrl + `/get-trip/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    if (onClick) {
-      onClick();
+      // Assuming the response contains the trip data
+      const tripData = await response.json();
+
+      console.log('Trip data:', tripData);
+
+      if (tripData) {
+        navigate(`/show-trip/${id}`, { state: { data: tripData.response } });
+      } else {
+        console.error('Trip data is undefined');
+      }
+    } catch (error) {
+      console.error('Error fetching trip data:', error);
     }
   };
 

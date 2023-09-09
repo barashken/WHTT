@@ -27,23 +27,16 @@ const LogoImage = styled('img')({
 });
 
 const TripsGallery = () => {
-  const handleTripClick = () => {
-    // Handle click logic here
-    console.log('Trip clicked!');
-  };
-
   const pictures = [
     {
       id: 1,
       imageSrc: '/rome.jpg',
       text: 'Rome Trip',
-      navigateTo: '/show-trip',
     },
     {
       id: 2,
       imageSrc: '/berlin.jpg',
       text: 'Berlin Trip',
-      navigateTo: '/show-trip',
     },
     // Add more pictures as needed
   ];
@@ -90,10 +83,9 @@ const TripsGallery = () => {
         {pictures.map((picture) => (
           <div style={tripWindowStyle} key={picture.id}>
             <TripWindow
+              id={picture.id}
               imageUrl={picture.imageSrc}
               text={picture.text}
-              onClick={handleTripClick}
-              navigateTo={picture.navigateTo}
             />
           </div>
         ))}

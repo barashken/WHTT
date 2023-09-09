@@ -17,7 +17,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/registration-done" element={<RegistrationDonePage />} />
         <Route path="/login-done" element={<LoginDonePage />} />
-        <Route path="/show-trip" element={<ShowTripPage />} />
+        <Route path="/show-trip/:id" element={<ShowTripPage />} />
         <Route path="/travel-form" element={<TravelFormPage />} />
 
       </Routes>
