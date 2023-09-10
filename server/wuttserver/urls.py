@@ -19,9 +19,11 @@ from django.urls import path
 from search.views import OpenAIView
 from users.views import RegisterView, LoginView, LogoutView
 from trips.views import GetTripView
+from .views import check_alive
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('check-alive/', check_alive, name='check-alive'),
     path('call-openai-api/', OpenAIView.call_openai_api_view, name='call-openai-api'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),

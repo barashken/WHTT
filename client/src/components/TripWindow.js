@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
 import { backendUrl } from '../constants';
-import ErrorPage from '../pages/ErrorPage';
 
 const frameStyle = {
   width: '250px',

@@ -9,11 +9,13 @@ import LoginDonePage from './pages/LoginDonePage';
 import ShowTripPage from './pages/ShowTripPage';
 import ErrorPage from './pages/ErrorPage';
 import ErrorBoundary from './components/ErrorBoundary';
+import ServerStatusChecker from './components/ServerStatusChecker';
 
 function App() {
   return (
     <Router>
       <ErrorBoundary>
+      <ServerStatusChecker />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<SignInPage />} />

@@ -3,7 +3,7 @@ import Geocode from 'react-geocode';
 
 const GoogleMap = ({ day }) => {
     const mapRef = useRef(null);
-    Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
     useEffect(() => {
         const mapOptions = {
@@ -30,7 +30,7 @@ const GoogleMap = ({ day }) => {
 
             marker.addListener('click', () => {
                 // Set the InfoWindow content to display details
-                infowindow.setContent(`<div style="color: ${color};">${details}</div>`);
+                infowindow.setcontent(`<div style="color: ${color};">${details}</div>`);
                 infowindow.setOptions({ maxWidth: 200 });
                 infowindow.open(map, marker);
               });
