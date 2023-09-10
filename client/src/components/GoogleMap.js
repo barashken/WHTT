@@ -30,7 +30,7 @@ const GoogleMap = ({ day }) => {
 
             marker.addListener('click', () => {
                 // Set the InfoWindow content to display details
-                infowindow.setcontent(`<div style="color: ${color};">${details}</div>`);
+                infowindow.setContent(`<div style="color: ${color};">${details}</div>`);
                 infowindow.setOptions({ maxWidth: 200 });
                 infowindow.open(map, marker);
               });
