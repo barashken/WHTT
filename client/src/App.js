@@ -22,7 +22,8 @@ function App() {
           <Route path="/login-done" element={<LoginDonePage />} />
           <Route path="/show-trip/:id" element={<ShowTripPage />} />
           <Route path="/travel-form" element={<TravelFormPage />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="/error/:errorCode" element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage errorCode={404} />} />
         </Routes>
       </ErrorBoundary>
     </Router>
