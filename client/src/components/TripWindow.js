@@ -53,16 +53,20 @@ const TripWindow = ({ id, imageUrl, text }) => {
 
       // Assuming the response contains the trip data
       const tripData = await response.json();
-
       console.log('Trip data:', tripData);
 
-      if (tripData) {
-        navigate(`/show-trip/${id}`, { state: { data: tripData.response } });
+      if (response.ok) {
+        if (tripData) {
+          navigate(`/show-trip/${id}`, { state: { data: tripData.response } });
+        } else {
+          console.error('Trip data is undefined');
+        }
       } else {
-        console.error('Trip data is undefined');
-      }
+        console.error('Error:', response.status, tripData);
+        navigate(`/error/${response.status}`);      }
     } catch (error) {
       console.error('Error fetching trip data:', error);
+      navigate(`/error/${error.response ? error.response.status : '500'}`);
     }
   };
 

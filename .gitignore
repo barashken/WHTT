@@ -2,6 +2,7 @@
 
 client/src/.env
 .env.local
+*.pyc
 
 # dependencies
 client/node_modules
