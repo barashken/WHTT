@@ -57,7 +57,7 @@ const TripWindow = ({ id, imageUrl, text }) => {
 
       if (response.ok) {
         if (tripData) {
-          navigate(`/show-trip/${id}`, { state: { data: tripData.response } });
+          navigate(`/show-trip/${tripData.response["trip-id"]}`, { state: { data: tripData.response } });
         } else {
           console.error('Trip data is undefined');
         }

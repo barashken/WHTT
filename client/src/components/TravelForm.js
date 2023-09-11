@@ -32,7 +32,7 @@ const TravelForm = () => {
       const formData = new FormData(formElement);
 
       const city = formData.get('city');
-      const tripStyle = formData.get('tripStyle');
+      const tripStyle = formData.get('style');
       const days = formData.get('days');
       const nature = formData.get('nature');
       const culture = formData.get('culture');
@@ -60,21 +60,20 @@ const TravelForm = () => {
           }),
         });
   
-        const responseData = await response.json();
-        console.log(responseData); 
+        const tripData = await response.json();
+        console.log(tripData); 
   
         if (response.ok) {
-          navigate('show-trip', {
-            state: {
-
-            },
-          });
-        }
-        else {
-          seterrorMessage(responseData.error);
+          if (tripData) {
+            navigate(`/show-trip/${tripData.response["trip-id"]}`, { state: { data: tripData.response } });
+          } else {
+            console.error('Trip data is undefined');
+          }
+        } else {
+          console.error('Error:', response.status, tripData);
+          seterrorMessage(tripData.error);
           setIsInputInvalid(true)
-        }
-  
+          navigate(`/error/${response.status}`);      }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -107,8 +106,8 @@ const TravelForm = () => {
             </Typography>
             <div className="radio-group-container">
               <RadioGroup
-                aria-label="tripStyle"
-                name="tripStyle"
+                aria-label="style"
+                name="style"
                 className="radio-group"
               >
                 <div className="radio-option">

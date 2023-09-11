@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <ErrorBoundary>
-      <ServerStatusChecker />
+      {/* <ServerStatusChecker /> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<SignInPage />} />
