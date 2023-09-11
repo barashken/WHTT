@@ -41,14 +41,14 @@ const GoogleMap = ({ day }) => {
         // Function to geocode a location and create a marker for it
         const geocodeAndCreateMarker = async (name, address, color) => {
             geocoder.geocode({ 'address': name}, function(results, status) {
-            if (status == 'OK') {
+            if (status === 'OK') {
                 const location = results[0].geometry.location;
                 const details = `<div><strong>${name}</strong><br>${address}</div>`;
                 createMarker(location, details, color);
             }
             else {
                 geocoder.geocode({ 'address': address}, function(results, status) {
-                if (status == 'OK') {
+                if (status === 'OK') {
                     const location = results[0].geometry.location;
                     const details = `<div><strong>${name}</strong><br>${address}</div>`;
                     createMarker(location, details, color);

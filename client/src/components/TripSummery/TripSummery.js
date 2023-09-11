@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Typography, Container, Box, Button } from '@mui/material';
 import DayDetails from '../DayDetails';
 import './TripSummery.css';

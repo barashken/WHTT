@@ -29,17 +29,24 @@ class OpenAIView(APIView):
 
 
     def search(self, body_request):
-        country = body_request.get("country", "")
-        city = body_request.get("city", "")
-        dates = body_request.get("dates", "")
-        days = dates #counting days from dates
-        adults_num = body_request.get("adults_num", "")
-        teens_num = body_request.get("teens_num", "")
-        children_num = body_request.get("children_num", "")
-        trip_vibe = body_request.get("trip_vibe", "")
-        budget = body_request.get("budget", "")
 
-        prompt = self.create_prompt(country, city, days, adults_num, teens_num, children_num, trip_vibe, budget)
+        city = body_request.get("city", "")
+        tripStyle = body_request.get("tripStyle", "")
+        days = body_request.get("days", "")
+        nature = body_request.get("nature", "")
+        culture = body_request.get("culture", "")
+        food = body_request.get("chifoodldren_num", "")
+
+
+        print (city)
+        print (tripStyle)
+        print (days)
+        print (nature)
+        print (culture)
+        print (food)
+
+
+        prompt = self.create_prompt(city, tripStyle, days, nature, culture, food)
         responseAPI = self.create_requset_to_api(prompt=prompt)
         
         return responseAPI
@@ -58,9 +65,10 @@ class OpenAIView(APIView):
         return response
 
 
-    def create_prompt(self, country, city, days, adults_num, teens_num, children_num, trip_vibe, budget):
-        prompt = '''As a tour guide, build me a {} days trip to {}, {}
-              for travelers {} adults, {} teens and {} childrens, the budget is {} for a {} trip.
+    def create_prompt(city, tripStyle, days, nature, culture, food):
+        
+
+        prompt = '''As a tour guide, build me a {} days trip to {}
               Give me an answer in JSON format, divided by days, for each day order me by attractions(3-4),
               1 hotel and 2 restaurants, and give a short explanation and locations and also short summary for the day.
               I want the JSON to be no more than 800 words.
@@ -89,7 +97,7 @@ class OpenAIView(APIView):
                   ...
                 ]
               }}
-              '''.format(days, city, country, adults_num, teens_num, children_num, budget, trip_vibe)
+              '''.format(days,city,)
 
         return prompt
 
