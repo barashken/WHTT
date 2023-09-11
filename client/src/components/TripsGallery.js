@@ -31,6 +31,21 @@ const TripsGallery = () => {
       imageSrc: '/berlin.jpg',
       text: 'Berlin Trip',
     },
+    {
+      id: 3,
+      imageSrc: '/paris.jpg',
+      text: 'Paris Trip',
+    },
+    {
+      id: 4,
+      imageSrc: '/london.jpg',
+      text: 'London Trip',
+    },
+    {
+      id: 5,
+      imageSrc: '/telaviv.jpg',
+      text: 'Tel Aviv Trip',
+    }
     // Add more pictures as needed
   ];
 

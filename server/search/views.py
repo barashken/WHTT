@@ -43,7 +43,12 @@ class OpenAIView(View):
               print(trip_data)
               trips_collection.insert_one(trip_data)
 
-              return JsonResponse({'response': trip_data}, status=200)
+              data = trips_collection.find_one({'trip-id': num_of_trips + 1})
+              if not data:
+                  return JsonResponse({'error': 'Invalid id'}, status=401)
+              else:
+                  data['_id'] = str(data['_id'])
+                  return JsonResponse({'response': data}, status=200)
             except Exception as e:
               return JsonResponse({'error': str(e)}, status=400)            
         else:
@@ -92,9 +97,9 @@ class OpenAIView(View):
 
     def create_prompt(self, city, tripStyle, days, nature, culture, food):
         prompt = '''As a tour guide, build me a 3 days trip to {}
-              Give me an answer in JSON format, divided by days, for each day order me by attractions(3-4),
-              1 hotel and 2 restaurants, and give a short explanation and locations and also short summary for the day.
-              I want the JSON to be no more than 800 words.
+              Give me an answer in json format, divided by days, for each day order me by attractions(3-4),
+              1 hotel and 2 restaurants, and give a short explanation(2 lines at most) and locations and also short summary for the day.
+              I want the json to be no more than 800 words and its must be json, not another format.
               The JSON looks like this:
               [{{
                 "day": "Day 1",
@@ -127,24 +132,3 @@ class OpenAIView(View):
 
         print(prompt)
         return prompt
-
-    def parse_response(self, response_str):
-      # Split the response string by newline characters to separate each day's JSON data
-      response_parts = response_str.split('\n')
-
-      # Initialize an empty list to store the structured JSON data
-      result_json = []
-
-      # Iterate through each separated JSON data string
-      for part in response_parts:
-          try:
-              # Parse the JSON data into a dictionary
-              day_data = json.loads(part.strip())  # Strip any leading/trailing whitespaces
-              result_json.append(day_data)
-          except json.JSONDecodeError:
-              # If there's an issue with parsing, you can handle it here
-              print(f"Failed to parse JSON: {part}")
-
-      # Now, result_json contains an array of days, each with attractions, a hotel, and restaurants
-      print(result_json)
-      return result_json

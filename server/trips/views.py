@@ -18,8 +18,8 @@ class GetTripView(View):
 
                 client = MongoClient(os.environ['MONGO_DB_URL'])
                 db = client['wutt']
-                users_collection = db['trips']
-                trip_data = users_collection.find_one({'trip-id': id})
+                trips_collection = db['trips']
+                trip_data = trips_collection.find_one({'trip-id': id})
 
                 if not trip_data:
                     return JsonResponse({'error': 'Invalid id'}, status=401)
