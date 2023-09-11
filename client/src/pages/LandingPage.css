@@ -5,7 +5,9 @@ body {
   background-position: center top;
   margin: 0;
   padding: 0;
-  background-size: 100%
+  background-size: 100%;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Style for the landing page */

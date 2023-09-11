@@ -3,13 +3,6 @@ import TripWindow from './TripWindow';
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles'; // Import styled from @mui/material/styles
 
-const containerStyle = {
-  display: 'flex',
-  flexDirection: 'column', // Display items vertically
-  alignItems: 'center', // Center items horizontally
-  textAlign: 'center', // Center text within the container
-};
-
 const galleryStyle = {
   display: 'flex',
   flexDirection: 'row', // Display frames side by side
