@@ -7,7 +7,7 @@ const GoogleMap = ({ day }) => {
 
     useEffect(() => {
         const mapOptions = {
-        center: { lat: 41.9028, lng: 12.4964 }, // Rome coordinates
+        center: { lat: 0, lng: 0 },
         zoom: 12,
         };
         const map = new window.google.maps.Map(mapRef.current, mapOptions);
@@ -63,6 +63,15 @@ const GoogleMap = ({ day }) => {
 
         // Create hotel marker (blue)
         if (day.hotel && day.hotel.location) {
+            geocoder.geocode({ 'address': day.hotel.location}, function(results, status) {
+                if (status == 'OK') {
+                    const location = results[0].geometry.location;
+                    map.setCenter(location); // Set the map center to the hotel location
+                }
+                else {
+                    alert('Geocode for the hotel location was not successful for the following reason: ' + status);
+                }
+            });
             geocodeAndCreateMarker(day.hotel.name, day.hotel.location, 'blue');
         }
 
