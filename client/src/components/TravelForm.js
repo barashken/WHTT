@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { backendUrl } from '../constants';
 import { TextField, Grid } from '@mui/material';
 import './TravelForm.css';
+import LoadindSpinner from './LoadingSpinner';
 
 const TravelForm = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const [isInputInvalid, setIsInputInvalid] = useState(false);
   const [cityQuery, setCityQuery] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // State variables to track selections and errors for each radio group
   const [styleSelection, setStyleSelection] = useState('');
@@ -59,6 +61,7 @@ const TravelForm = () => {
     // Clear any previous error messages
     setErrorMessage('');
     setIsInputInvalid(false);
+    setLoading(true);
 
     const city = cityQuery;
     const formElement = event.currentTarget;
@@ -81,7 +84,7 @@ const TravelForm = () => {
         },
         body: JSON.stringify({
           city,
-          tripStyle: styleSelection,
+          style: styleSelection,
           days: daysSelection,
           nature: natureSelection,
           culture: cultureSelection,
@@ -106,6 +109,8 @@ const TravelForm = () => {
       }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -128,6 +133,8 @@ const TravelForm = () => {
 
   return (
     <div className="container">
+      {loading && <LoadindSpinner />}
+      
       <Typography variant="h4" gutterBottom fontFamily="Jura, Arial, sans-serif">
         Fill the form according to your vision...
       </Typography>
@@ -147,8 +154,8 @@ const TravelForm = () => {
             onChange={(e) => setCityQuery(e.target.value)}
           />
         </Grid>
-
-        <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif">
+        <br />
+        <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
           What is your trip style?
         </Typography>
         <div className="radio-group-container">
@@ -156,6 +163,7 @@ const TravelForm = () => {
             aria-label="style"
             name="style"
             className="radio-group"
+            align='center'
             value={styleSelection}
             onChange={(e) => {
               setStyleSelection(e.target.value);
@@ -163,16 +171,17 @@ const TravelForm = () => {
             }}>
             <div className="radio-option">
                   <FormControlLabel
-                    value="dynamic"
+                    value="Dynamic"
                     control={<Radio />}
                     label={
                       <div>
                         <div>Dynamic</div>
                         <div className="small-text">I'm looking for a dynamic travel exprerience, exploring multiple destinations and convering a lot of ground</div>
                       </div>
-                    }                  />
+                    }                 
+                  />
                   <FormControlLabel
-                    value="relaxed"
+                    value="Relaxed"
                     control={<Radio />}
                     label={
                       <div>
@@ -189,8 +198,8 @@ const TravelForm = () => {
             {styleError}
           </Typography>
         )}
-
-<Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif">
+        <br />
+            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               How many days?
             </Typography>
             <div className="radio-group-container">
@@ -198,6 +207,7 @@ const TravelForm = () => {
                 aria-label="tripDuration"
                 name="days"
                 className="radio-group"
+                align='center'
                 value={daysSelection}
                 onChange={(e) => {
                   setDaysSelection(e.target.value);
@@ -240,8 +250,8 @@ const TravelForm = () => {
                 {daysError}
               </Typography>
             )}
-
-            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif">
+          <br />
+            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               What about nature?
             </Typography>
             <div className="radio-group-container">
@@ -249,6 +259,7 @@ const TravelForm = () => {
                 aria-label="naturePreference"
                 name="nature"
                 className="radio-group"
+                align='center'
                 value={natureSelection}
                 onChange={(e) => {
                   setNatureSelection(e.target.value);
@@ -257,7 +268,7 @@ const TravelForm = () => {
               >
                 <div className="radio-option">
                   <FormControlLabel
-                    value="must"
+                    value="Must"
                     control={<Radio />}
                     label={
                       <div>
@@ -266,7 +277,7 @@ const TravelForm = () => {
                       </div>
                     }                    />
                   <FormControlLabel
-                    value="optional"
+                    value="Optional"
                     control={<Radio />}
                     label={
                       <div>
@@ -282,8 +293,8 @@ const TravelForm = () => {
                 {natureError}
               </Typography>
             )}
-
-            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif">
+          <br />  
+            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               What about culture?
             </Typography>
             <div className="radio-group-container">
@@ -291,6 +302,7 @@ const TravelForm = () => {
                 aria-label="culturePreference"
                 name="culture"
                 className="radio-group"
+                align='center'
                 value={cultureSelection}
                 onChange={(e) => {
                   setCultureSelection(e.target.value);
@@ -299,7 +311,7 @@ const TravelForm = () => {
               >
                 <div className="radio-option">
                   <FormControlLabel
-                    value="must"
+                    value="Must"
                     control={<Radio />}
                     label={
                       <div>
@@ -308,7 +320,7 @@ const TravelForm = () => {
                       </div>
                     }                    />
                   <FormControlLabel
-                    value="optional"
+                    value="Optional"
                     control={<Radio />}
                     label={
                       <div>
@@ -324,8 +336,8 @@ const TravelForm = () => {
                 {cultureError}
               </Typography>
             )}
-
-            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif">
+          <br />
+            <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               And some food?
             </Typography>
             <div className="radio-group-container">
@@ -333,6 +345,7 @@ const TravelForm = () => {
                 aria-label="foodPreference"
                 name="food"
                 className="radio-group"
+                align='center'
                 value={foodSelection}
                 onChange={(e) => {
                   setFoodSelection(e.target.value);
@@ -341,7 +354,7 @@ const TravelForm = () => {
               >
                 <div className="radio-option">
                   <FormControlLabel
-                    value="must"
+                    value="Must"
                     control={<Radio />}
                     label={
                       <div>
@@ -350,7 +363,7 @@ const TravelForm = () => {
                       </div>
                     }                    />
                   <FormControlLabel
-                    value="optional"
+                    value="Optional"
                     control={<Radio />}
                     label={
                       <div>
@@ -367,7 +380,7 @@ const TravelForm = () => {
                 {foodError}
               </Typography>
             )}
-
+          <br />
         <Button
           style={buttonStyle}
           type="submit"

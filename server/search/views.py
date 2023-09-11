@@ -63,6 +63,7 @@ class OpenAIView(View):
         nature = body_request.get("nature")
         culture = body_request.get("culture")
         food = body_request.get("food")
+        days_dict = {'short': '3', 'medium': '5', 'long': '7'}
 
 
         print (city)
@@ -73,7 +74,7 @@ class OpenAIView(View):
         print (food)
 
 
-        prompt = self.create_prompt(city, tripStyle, days, nature, culture, food)
+        prompt = self.create_prompt(city, tripStyle, days_dict[days], nature, culture, food)
         responseAPI = self.create_requset_to_api(prompt=prompt)
         
         return responseAPI
@@ -96,7 +97,7 @@ class OpenAIView(View):
 
 
     def create_prompt(self, city, tripStyle, days, nature, culture, food):
-        prompt = '''As a tour guide, build me a 3 days trip to {}
+        prompt = '''As a tour guide, build me a {} days trip to {}. the trip should be {}.
               Give me an answer in json format, divided by days, for each day order me by attractions(3-4),
               1 hotel and 2 restaurants, and give a short explanation(2 lines at most) and locations and also short summary for the day.
               I want the json to be no more than 800 words and its must be json, not another format.
@@ -128,7 +129,7 @@ class OpenAIView(View):
               }}]
               an array of days, each day is an object that has an array of attractions, an hotel and an array of restaurants.
               the attractions, hotel and restaurants are objects thats have name, location and description.
-              '''.format(city)
+              '''.format(days, city, tripStyle)
 
         print(prompt)
         return prompt
