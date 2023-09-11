@@ -21,7 +21,7 @@ class RegisterView(View):
 
                 hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-                client = MongoClient('mongodb://localhost:27017/')
+                client = MongoClient(os.environ['MONGO_DB_URL'])
                 db = client['wutt']
                 users_collection = db['users']
 

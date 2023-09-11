@@ -1,50 +1,87 @@
 import openai
 import json
+from django.views import View
 from django.http import JsonResponse
+from pymongo import MongoClient
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+from dotenv import load_dotenv
+import os
 
-class OpenAIView(APIView):
-    # Set your OpenAI API key here
-    openai.api_key = 'YOUR_OPENAI_API_KEY'
+load_dotenv()
 
-    @csrf_exempt  # To disable CSRF protection for this view. Use with caution.
-    def call_openai_api_view(self, request):
+class OpenAIView(View):
+    @csrf_exempt    
+    def post(self, request):
         if request.method == 'POST':
             try:
-                data = json.loads(request.body)  # Parse the JSON data from the request body
-                response = self.search(data)
-                # Customize the 'engine' and 'max_tokens' parameters based on your needs
-            except Exception as e:
-                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-            response_data = {'generated_text': response['choices'][0]['text']}
-            with open('response.json', 'w') as file:
-              file.write(response_data)
+              body = json.loads(request.body)
+              print(body)                
+              response = self.search(body)
+              response_data = response['choices'][0]['text']
+              with open('response1.json', 'w') as file:
+                json.dump(response_data, file)
 
-            return Response({'response': response_data}, status=status.HTTP_200_OK)
+              # with open('response1.json', 'r') as file:
+              #   print("file")
+              #   json_response = file.read()
+
+              json_response = json.loads(response_data)
+              client = MongoClient(os.environ['MONGO_DB_URL'])
+              db = client['wutt']
+              trips_collection = db['trips']
+              num_of_trips = trips_collection.count_documents({})
+              print(num_of_trips)
+
+              print(trips_collection)
+              print(json_response)
+
+              trip_data = {
+                'trip-id': num_of_trips + 1,
+                'trip-data': json_response, 
+                'trip-req': body
+              }
+              print(trip_data)
+              trips_collection.insert_one(trip_data)
+
+              data = trips_collection.find_one({'trip-id': num_of_trips + 1})
+              if not data:
+                  return JsonResponse({'error': 'Invalid id'}, status=401)
+              else:
+                  data['_id'] = str(data['_id'])
+                  return JsonResponse({'response': data}, status=200)
+            except Exception as e:
+              return JsonResponse({'error': str(e)}, status=400)            
         else:
-            return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
     def search(self, body_request):
-        country = body_request.get("country", "")
-        city = body_request.get("city", "")
-        dates = body_request.get("dates", "")
-        days = dates #counting days from dates
-        adults_num = body_request.get("adults_num", "")
-        teens_num = body_request.get("teens_num", "")
-        children_num = body_request.get("children_num", "")
-        trip_vibe = body_request.get("trip_vibe", "")
-        budget = body_request.get("budget", "")
 
-        prompt = self.create_prompt(country, city, days, adults_num, teens_num, children_num, trip_vibe, budget)
+        city = body_request.get("city")
+        tripStyle = body_request.get("style")
+        days = body_request.get("days")
+        nature = body_request.get("nature")
+        culture = body_request.get("culture")
+        food = body_request.get("food")
+        days_dict = {'short': '3', 'medium': '5', 'long': '7'}
+
+
+        print (city)
+        print (tripStyle)
+        print (days)
+        print (nature)
+        print (culture)
+        print (food)
+
+
+        prompt = self.create_prompt(city, tripStyle, days_dict[days], nature, culture, food)
         responseAPI = self.create_requset_to_api(prompt=prompt)
         
         return responseAPI
 
     def create_requset_to_api(self, prompt):
+        print("requst to api")
+        openai.api_key = os.environ['OPENAI_API_KEY']
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=prompt,
@@ -55,18 +92,18 @@ class OpenAIView(APIView):
             presence_penalty=0.0
         )
 
+        print(response)
         return response
 
 
-    def create_prompt(self, country, city, days, adults_num, teens_num, children_num, trip_vibe, budget):
-        prompt = '''As a tour guide, build me a {} days trip to {}, {}
-              for travelers {} adults, {} teens and {} childrens, the budget is {} for a {} trip.
-              Give me an answer in JSON format, divided by days, for each day order me by attractions(3-4),
-              1 hotel and 2 restaurants, and give a short explanation and locations and also short summary for the day.
-              I want the JSON to be no more than 800 words.
+    def create_prompt(self, city, tripStyle, days, nature, culture, food):
+        prompt = '''As a tour guide, build me a {} days trip to {}. the trip should be {}.
+              Give me an answer in json format, divided by days, for each day order me by attractions(3-4),
+              1 hotel and 2 restaurants, and give a short explanation(2 lines at most) and locations and also short summary for the day.
+              I want the json to be no more than 800 words and its must be json, not another format.
               The JSON looks like this:
-              {{
-                "day": "Day1",
+              [{{
+                "day": "Day 1",
                 "attractions": [
                   {{
                     "name": "",
@@ -87,10 +124,12 @@ class OpenAIView(APIView):
                     "description": ""
                   }},
                   ...
-                ]
-              }}
-              '''.format(days, city, country, adults_num, teens_num, children_num, budget, trip_vibe)
+                ],
+                "summary": ""
+              }}]
+              an array of days, each day is an object that has an array of attractions, an hotel and an array of restaurants.
+              the attractions, hotel and restaurants are objects thats have name, location and description.
+              '''.format(days, city, tripStyle)
 
+        print(prompt)
         return prompt
-
-

@@ -1,0 +1,24 @@
+{{
+                "day": "Day1",
+                "attractions": [
+                  {{
+                    "name": "",
+                    "location": "",
+                    "description": ""
+                  }},
+                  ...
+                ],
+                "hotel": {{
+                  "name": "",
+                  "location": "",
+                  "description": ""
+                }},
+                "restaurants": [
+                  {{
+                    "name": "",
+                    "location": "",
+                    "description": ""
+                  }},
+                  ...
+                ]
+              }}

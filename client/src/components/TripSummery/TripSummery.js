@@ -68,7 +68,7 @@ const TripSummery = ({ id }) => {
         Like you asked:
       </Typography>
       <Typography variant="h4" gutterBottom fontFamily="Jura, Arial, sans-serif">
-        Trip to <bold>{tripDataReq.city}, {tripDataReq.country}</bold>
+        Trip to <bold>{tripDataReq.city}</bold>
       </Typography>
       <br />
       <LogoContainer>

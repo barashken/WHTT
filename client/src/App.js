@@ -10,12 +10,13 @@ import ShowTripPage from './pages/ShowTripPage';
 import ErrorPage from './pages/ErrorPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import ServerStatusChecker from './components/ServerStatusChecker';
+import LoadingSpinnerPage from './pages/LoadingSpinnerPage';
 
 function App() {
   return (
     <Router>
       <ErrorBoundary>
-      <ServerStatusChecker />
+      {/* <ServerStatusChecker /> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<SignInPage />} />
@@ -25,7 +26,8 @@ function App() {
           <Route path="/show-trip/:id" element={<ShowTripPage />} />
           <Route path="/travel-form" element={<TravelFormPage />} />
           <Route path="/error/:errorCode" element={<ErrorPage />} />
-          <Route path="*" element={<ErrorPage errorCode={404} />} />
+          <Route path="*" element={<ErrorPage errorCode={404} />} />  
+          <Route path="/loading-spinner" element={<LoadingSpinnerPage />} />
         </Routes>
       </ErrorBoundary>
     </Router>
