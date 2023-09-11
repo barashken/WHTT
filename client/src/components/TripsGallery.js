@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import TripWindow from './TripWindow';
-import { Typography } from '@mui/material';
-import { styled } from '@mui/material/styles'; // Import styled from @mui/material/styles
+import { Typography, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-const galleryStyle = {
-  display: 'flex',
-  flexDirection: 'row', // Display frames side by side
-  alignItems: 'center', // Center frames vertically
-  justifyContent: 'center', // Center frames horizontally
-};
+// const galleryStyle = {
+//   display: 'flex',
+//   flexDirection: 'row',
+//   alignItems: 'center',
+//   overflowX: 'auto', // Enable horizontal scrolling
+//   position: 'relative',
+//   maxWidth: '100%', // Make the gallery responsive
+// };
 
 const tripWindowStyle = {
-  margin: '10px', // Add some margin to create intervals between TripWindows
+  margin: '10px',
+  flex: '0 0 auto', // Ensure trip windows don't shrink
 };
 
 const LogoImage = styled('img')({
-  height: 60, // Adjust the height to your desired size
+  height: 60,
   marginRight: 16,
 });
 
@@ -42,61 +46,71 @@ const TripsGallery = () => {
       text: 'London Trip',
     },
     {
-      id: 5,
-      imageSrc: '/telaviv.jpg',
-      text: 'Tel Aviv Trip',
-    }
+      id: 6,
+      imageSrc: '/budapest.jpg',
+      text: 'Budapest Trip',
+    },
+    // {
+    //   id: 7,
+    //   imageSrc: '/athens.jpg',
+    //   text: 'Athens Trip',
+    // }
     // Add more pictures as needed
   ];
 
+  const slideLeft = () => {
+    var slider = document.getElementById('slider');
+    slider.scrollLeft -= 500;
+  }
+
+  const slideRight = () => {
+    var slider = document.getElementById('slider');
+    slider.scrollLeft += 500;
+  }
+
   return (
     <div>
-      <Typography
-        variant="h2"
-        component="h2"
-        gutterBottom
-        fontFamily="Jura, Arial, sans-serif"
-        style={{
-           textAlign: 'left',
-           fontWeight: 'bold',
-           }}
-      >
+      <Typography variant="h2" component="h2" gutterBottom fontFamily="Jura, Arial, sans-serif" style={{ textAlign: 'left', fontWeight: 'bold' }}>
         Discover the world with{' '} 
         <LogoImage src="\wuttlogo2.png"/>
       </Typography>
-      <Typography
-        variant="h4"
-        component="h4"
-        gutterBottom
-        fontFamily="Jura, Arial, sans-serif"
-        style={{ textAlign: 'left' }} // Align text to the left
-      >
+      <Typography variant="h4" component="h4" gutterBottom fontFamily="Jura, Arial, sans-serif" style={{ textAlign: 'left' }}>
         Don't just visit places - experience them like a local!
         <br />With WUTT's unique trips, you'll get to know the real city, not just the tourist traps.
       </Typography>
-      <p style={{ margin: '60px' }}></p>
-      <Typography
-        variant="h2"
-        component="h2"
-        gutterBottom
-        fontFamily="Jura, Arial, sans-serif"
-        style={{
-           textAlign: 'center',
-           fontWeight: 'bold',
-          }}
-      >
-        Favorite Trips 
+      <p style={{ margin: '50px' }}></p>
+
+      <Typography variant="h2" component="h2" gutterBottom fontFamily="Jura, Arial, sans-serif" style={{ textAlign: 'center', fontWeight: 'bold' }}>
+        Favorite Trips
       </Typography>
-      <div style={galleryStyle}>
-        {pictures.map((picture) => (
-          <div style={tripWindowStyle} key={picture.id}>
-            <TripWindow
-              id={picture.id}
-              imageUrl={picture.imageSrc}
-              text={picture.text}
-            />
-          </div>
-        ))}
+      <div className='relative flex items-center' style={
+          {
+            display: 'flex', // Use flex display
+            flexDirection: 'row', // Arrange items in a row
+            alignItems: 'center',
+            overflowX: 'auto', // Enable horizontal scrolling
+            maxWidth: '100%', // Make the gallery responsive
+          }}>
+        <MdChevronLeft onClick={slideLeft} size={80} />
+        <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth'  style={
+          {
+            display: 'flex', // Use flex display
+            flexDirection: 'row', // Arrange items in a row
+            alignItems: 'center',
+            overflowX: 'auto', // Enable horizontal scrolling
+            maxWidth: '100%', // Make the gallery responsive
+          }}>
+          {pictures.map((picture) => (
+            <div style={tripWindowStyle} key={picture.id}>
+              <TripWindow
+                id={picture.id}
+                imageUrl={picture.imageSrc}
+                text={picture.text}
+                />
+            </div>
+          ))}
+        </div>
+        <MdChevronRight onClick={slideRight} size={80} />
       </div>
     </div>
   );
