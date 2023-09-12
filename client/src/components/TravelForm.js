@@ -135,7 +135,7 @@ const TravelForm = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div>
       {loading && <LoadindSpinner />}
       
       <Typography variant="h4" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
@@ -399,7 +399,7 @@ const TravelForm = () => {
       </form>
 
       {isInputInvalid && (
-        <Typography variant="body2" color="error" gutterBottom>
+        <Typography variant="body2" color="error" gutterBottom align='center'>
           {errorMessage}
         </Typography>
       )}
