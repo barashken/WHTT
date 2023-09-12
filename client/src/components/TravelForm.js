@@ -36,8 +36,11 @@ const TravelForm = () => {
     fontWeight: 'bold', // Set font weight if needed
     fontFamily: 'Jura, Arial, sans-serif',
     padding: '15px 45px',
-    gap: '10px',
+    gap: '100px',
     fontSize: '1.5rem',
+    align: 'center',
+    width: '600px',
+
   };
 
   const handleStartTripClick = async (event) => {
@@ -135,22 +138,23 @@ const TravelForm = () => {
     <div className="container">
       {loading && <LoadindSpinner />}
       
-      <Typography variant="h4" gutterBottom fontFamily="Jura, Arial, sans-serif">
+      <Typography variant="h4" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
         Fill the form according to your vision...
       </Typography>
       <Box my={1} />
 
-      <form onSubmit={handleStartTripClick} sx={{ mt: 3 }}>
-        <Grid item xs={12} sm={6}>
+      <form onSubmit={handleStartTripClick} sx={{ mt: 3 }} align='center'>
+        <Grid item xs={12} sm={6} align='center'> 
         <TextField
             autoComplete="off"
             name="city"
             required
-            fullWidth
             id="city"
             label="Where do you want to travel? (City)"
             autoFocus
             value={cityQuery}
+            align='center'
+            style={{ width: '600px' }}
             onChange={(e) => setCityQuery(e.target.value)}
           />
         </Grid>
@@ -158,7 +162,7 @@ const TravelForm = () => {
         <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
           What is your trip style?
         </Typography>
-        <div className="radio-group-container">
+        {/* <div className="radio-group-container"> */}
           <RadioGroup
             aria-label="style"
             name="style"
@@ -192,7 +196,7 @@ const TravelForm = () => {
                   />
                 </div>
           </RadioGroup>
-        </div>
+        {/* </div> */}
         {styleError && (
           <Typography variant="body2" color="error" gutterBottom>
             {styleError}
@@ -202,7 +206,7 @@ const TravelForm = () => {
             <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               How many days?
             </Typography>
-            <div className="radio-group-container">
+            {/* <div className="radio-group-container"> */}
               <RadioGroup
                 aria-label="tripDuration"
                 name="days"
@@ -244,7 +248,7 @@ const TravelForm = () => {
                     }                    />
                 </div>
               </RadioGroup>
-            </div>
+            {/* </div> */}
             {daysError && (
               <Typography variant="body2" color="error" gutterBottom>
                 {daysError}
@@ -254,7 +258,7 @@ const TravelForm = () => {
             <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               What about nature?
             </Typography>
-            <div className="radio-group-container">
+            {/* <div className="radio-group-container"> */}
               <RadioGroup
                 aria-label="naturePreference"
                 name="nature"
@@ -287,7 +291,7 @@ const TravelForm = () => {
                     }                    />
                 </div>
               </RadioGroup>
-            </div>
+            {/* </div> */}
             {natureError && (
               <Typography variant="body2" color="error" gutterBottom>
                 {natureError}
@@ -297,7 +301,7 @@ const TravelForm = () => {
             <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               What about culture?
             </Typography>
-            <div className="radio-group-container">
+            {/* <div className="radio-group-container"> */}
               <RadioGroup
                 aria-label="culturePreference"
                 name="culture"
@@ -330,7 +334,7 @@ const TravelForm = () => {
                     }                    />
                 </div>
               </RadioGroup>
-            </div>
+            {/* </div> */}
             {cultureError && (
               <Typography variant="body2" color="error" gutterBottom>
                 {cultureError}
@@ -340,7 +344,7 @@ const TravelForm = () => {
             <Typography variant="h5" gutterBottom fontFamily="Jura, Arial, sans-serif" align='center'>
               And some food?
             </Typography>
-            <div className="radio-group-container">
+            {/* <div className="radio-group-container"> */}
               <RadioGroup
                 aria-label="foodPreference"
                 name="food"
@@ -374,22 +378,24 @@ const TravelForm = () => {
                   />
                 </div>
               </RadioGroup>
-            </div>
+            {/* </div> */}
             {foodError && (
               <Typography variant="body2" color="error" gutterBottom>
                 {foodError}
               </Typography>
             )}
           <br />
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
         <Button
           style={buttonStyle}
           type="submit"
-          fullWidth
           variant="contained"
+          align='center'
           sx={{ mt: 3, mb: 2 }}
         >
           Let's have fun!
         </Button>
+        </div>
       </form>
 
       {isInputInvalid && (

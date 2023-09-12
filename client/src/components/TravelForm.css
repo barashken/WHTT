@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    align-items: center;
   }
   
   .radio-option {
@@ -24,18 +25,22 @@
     cursor: pointer;
     transition: background-color 0.2s;
     color: #000; /* Set text color to black */
+    align-items: center;
   }
   
   .radio-option label:hover {
     background-color: rgba(255, 255, 255, 0.5);
+    align-items: center;
   }
   
   .radio-option input[type="radio"] {
     display: none;
+    align-items: center;
   }
   
   .radio-option label {
     cursor: pointer;
+    align-items: center;
   }
   
   .radio-option input[type="radio"]:checked + label {
@@ -49,4 +54,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
+    align-items: center;
   }
