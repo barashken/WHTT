@@ -101,7 +101,7 @@ class OpenAIView(View):
               Give me an answer in json format, divided by days, for each day order me by attractions(3-4),
               1 hotel and 2 restaurants, and give a short explanation(2 lines at most) and locations and also short summary for the day.
               I want the json to be no more than 800 words and its must be json, not another format.
-              The JSON looks like this:
+              The JSON looks like this, without field before the first bracket :
               [{{
                 "day": "Day 1",
                 "attractions": [

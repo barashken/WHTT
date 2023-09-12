@@ -6,6 +6,7 @@ import bcrypt
 import json
 import jwt
 from datetime import datetime, timedelta
+import os
 
 class RegisterView(View):
     @csrf_exempt
