@@ -1,7 +1,7 @@
 # WUTT - With Us To Travel
 
 ## Running steps
-Follow the instuctions in client and server.
+Follow the instructions in the client project and the server project.
 
 ## Demo:
 Video Demo: https://www.youtube.com/watch?v=4gmOhdzwsGA
